@@ -1,0 +1,52 @@
+{
+    "name": "fivefilters/readability.php",
+    "type": "library",
+    "description": "A PHP port of Readability.js",
+    "keywords": ["readability", "html"],
+    "homepage": "https://github.com/fivefilters/readability.php",
+    "license": "Apache-2.0",
+    "repositories": [
+        {
+        "name": "masterminds/html5",
+        "type": "vcs",
+        "url": "https://dev.tt-rss.org/fox/html5-php.git"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Andres Rey",
+            "email": "andreskrey@gmail.com",
+            "role": "Original Developer"
+        },
+        {
+            "name": "Keyvan Minoukadeh",
+            "email": "keyvan@fivefilters.org",
+            "homepage": "https://www.fivefilters.org",
+            "role": "Developer/Maintainer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "fivefilters\\Readability\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {"fivefilters\\Readability\\Test\\": "test"}
+    },
+    "require": {
+        "php": ">=7.3.0",
+        "ext-dom": "*",
+        "ext-xml": "*",
+        "ext-mbstring": "*",
+        "psr/log": "^1.0",
+        "masterminds/html5": "2.7.x-dev@dev",
+        "league/uri": "^6.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "monolog/monolog": "^2.3"
+    },
+    "suggest": {
+        "monolog/monolog": "Allow logging debug information"
+    }
+}

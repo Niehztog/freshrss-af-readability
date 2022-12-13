@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
+    stages {
+        stage('phpstan') {
+            steps {
+                sh """
+                docker run --rm -v ${env.WORKSPACE}:/src/tt-rss/lib/local \
+                    --workdir /src/tt-rss registry.fakecake.org/cthulhoo/ttrss-fpm-pgsql-static:latest\
+                    php81 ./vendor/bin/phpstan analyse lib/local --memory-limit=1G
+                """
+            }
+        }
+    }
+}

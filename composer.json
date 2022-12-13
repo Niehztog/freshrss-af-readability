@@ -1,0 +1,20 @@
+{
+	 "minimum-stability": "dev",
+	 "prefer-stable": true,
+    "repositories": [
+        {
+	        "name": "fivefilters/readability.php",
+	        "type": "vcs",
+	        "url": "https://dev.tt-rss.org/fox/readability-php.git"
+        },
+        {
+	        "name": "masterminds/html5",
+	        "type": "vcs",
+	        "url": "https://dev.tt-rss.org/fox/html5-php.git"
+        }
+    ],
+    "require": {
+        "fivefilters/readability.php": "dev-master",
+		  "psr/http-factory": "1.0.1"
+    }
+}
