@@ -117,6 +117,7 @@ Then you pass this Configuration object to Readability. The following options ar
 - **KeepClasses**: default value `false`, which removes all `class="..."` attribute values from HTML elements.
 - **Parser**: default value `html5`, which uses HTML5-PHP for parsing. Set to `libxml` to use that instead (not recommended for modern HTML documents).
 - **SummonCthulhu**: default value `false`, remove all `<script>` nodes via regex. This is not ideal as it might break things, but if you've set the parser to libxml (see above), it might be the only solution to [libxml problems with unescaped javascript](https://github.com/fivefilters/readability.php#known-libxml-parsing-issues).
+- **ExtraIgnoredElements**: default value `[]`, additional DOM elements that should be ignored.  `noscript` and `script` are always ignored.
 
 ### Debug log
 

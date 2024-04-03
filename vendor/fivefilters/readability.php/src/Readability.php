@@ -342,7 +342,7 @@ class Readability
         // Extract JSON-LD metadata before removing scripts
         $this->jsonld = $this->configuration->getDisableJSONLD() ? [] : $this->getJSONLD($dom);
 
-        $this->removeScripts($dom);
+        $this->removeIgnoredElements($dom);
 
         $this->prepDocument($dom);
 
@@ -1188,13 +1188,13 @@ class Readability
     }
 
     /**
-     * Removes all the scripts of the html.
+     * Removes elements that should be ignored.
      *
      * @param DOMDocument $dom
      */
-    private function removeScripts(DOMDocument $dom)
+    private function removeIgnoredElements(DOMDocument $dom)
     {
-        foreach (['script', 'noscript'] as $tag) {
+        foreach (['noscript', 'script', ...$this->configuration->getExtraIgnoredElements()] as $tag) {
             $nodes = $dom->getElementsByTagName($tag);
             foreach (iterator_to_array($nodes) as $node) {
                 NodeUtility::removeNode($node);
