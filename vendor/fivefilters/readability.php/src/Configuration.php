@@ -84,6 +84,11 @@ class Configuration
     protected $disableJSONLD = false;
 
     /**
+     * @var array<string>
+     */
+    protected $extraIgnoredElements = [];
+
+    /**
      * Configuration constructor.
      *
      * @param array $params
@@ -417,6 +422,26 @@ class Configuration
     public function setSummonCthulhu($summonCthulhu)
     {
         $this->summonCthulhu = $summonCthulhu;
+
+        return $this;
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getExtraIgnoredElements()
+    {
+        return $this->extraIgnoredElements;
+    }
+
+    /**
+     * @param array<string>
+     *
+     * @return $this
+     */
+    public function setExtraIgnoredElements($extraIgnoredElements)
+    {
+        $this->extraIgnoredElements = $extraIgnoredElements;
 
         return $this;
     }

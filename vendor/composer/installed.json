@@ -7,7 +7,7 @@
             "source": {
                 "type": "git",
                 "url": "https://dev.tt-rss.org/fox/readability-php.git",
-                "reference": "8ac5abdd497b37d2be4833bcf18d6819bba4d9c9"
+                "reference": "37c0c2ce76aa90e8adafbd5cb0b0332a54df1523"
             },
             "require": {
                 "ext-dom": "*",
@@ -25,7 +25,7 @@
             "suggest": {
                 "monolog/monolog": "Allow logging debug information"
             },
-            "time": "2022-07-31T06:02:47+00:00",
+            "time": "2024-04-03T17:38:00+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
