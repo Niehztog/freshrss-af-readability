@@ -1,0 +1,65 @@
+<form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
+<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
+
+    <div>
+		<p>Shown below are the feeds, to which this addon will apply either Mercury, Readability or Five-Filters Parsing. Remember to hit <b>Submit</b> at the bottom after making changes.</p>
+
+		<?php
+		foreach ($this->getCategories() as $c) {
+		?>
+
+			<h3><?php echo $c->name()?></h3>
+			<table>
+			<tr>
+				<td class="rotate"><div><span>Readability</span></div></td>
+				<td class="rotatelast"><div><span>Feed</span></div></td>
+			</tr>
+			<tr>
+				<td class="chckbx"> <input type="checkbox"
+				    autocomplete="off"
+					id="cat_<?php echo $c->id() ?>"
+					name="cat_<?php echo $c->id() ?>"
+					value="1" <?php echo $this->getConfigCategories($c->id()) ? 'checked="checked"' : ''; ?> >
+				</td>
+				<td class="boldtd" >Whole Category: <?php echo $c->name()?></td>
+			</tr>
+
+				<?php
+				foreach ( $c->feeds() as $f) {
+				?>
+
+					<tr>
+					<td class="chckbx"> <input type="checkbox"
+					    autocomplete="off"
+						id="feed_<?php echo $f->id() ?>"
+						name="feed_<?php echo $f->id() ?>"
+						value="1"
+						<?php
+							echo $this->getConfigFeeds($f->id()) ? 'checked="checked"' : '';
+						?>
+					>
+
+					</td>
+					<td><?php echo $f->name() ?></td>
+					</tr>
+
+				<?php
+				}
+				?>
+
+			</table>
+
+		<?php
+		}
+		?>
+
+		<br>
+    </div>
+
+    <div class="form-group form-actions">
+	<div class="group-controls">
+	    <button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
+	    <button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
+	</div>
+    </div>
+</form>

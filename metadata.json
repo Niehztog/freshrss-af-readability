@@ -1,0 +1,8 @@
+{
+	"name": "Af_Readability",
+	"author": "niehztog",
+	"description": "Try to inline article content using Readability",
+	"version": "0.1",
+	"entrypoint": "Af_Readability",
+	"type": "user"
+}
