@@ -7,6 +7,9 @@ This FreshRSS extension uses the [Fivefilters Readability.php library](https://g
 - Works entirely client-side (no external services required)
 - Preserves original formatting when possible
 
+## Requirements
+- PHP 8.1+, ext-dom, ext-xml, and ext-mbstring
+
 ## Installation
 
 ### Step-by-Step Installation Guide
