@@ -6,7 +6,7 @@ declare(strict_types=1);
 <input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 
     <div>
-		<p>Shown below are the feeds, to which this addon will apply either Mercury, Readability or Five-Filters Parsing. Remember to hit <b>Submit</b> at the bottom after making changes.</p>
+		<p>Shown below are the feeds for which full-text extraction will be applied using the Readability library. The extension will automatically process new articles as they are fetched. Existing articles won't be reprocessed automatically. To reprocess previous articles, you'll need to delete and refetch them. Remember to click <b>Submit</b> to save your changes</p>
 
 		<?php
 		foreach ($this->getCategories() as $c) {

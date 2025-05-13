@@ -1,7 +1,65 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [v3.3.3](https://github.com/fivefilters/readability.php/releases/tag/v3.3.3)
+- Fix type error - extends type support to add DOMProcessingInstruction in more method signatures (reported by @reinierkors)
+
+## [v3.3.2](https://github.com/fivefilters/readability.php/releases/tag/v3.3.2)
+- Fix type error - extends type support to include DOMCdataSection and DOMProcessingInstruction in various method signatures (reported by @mikiescolarmrf and @Grotax)
+
+## [v3.3.1](https://github.com/fivefilters/readability.php/releases/tag/v3.3.1)
+- Fix DOMProcessingInstruction errors
+
+## [v3.3.0](https://github.com/fivefilters/readability.php/releases/tag/v3.3.0)
+- Fixed PHP 8.4 deprecation warning (reported by @pich)
+- Migrated type declarations from PHPDoc blocks to native PHP 8 property and method types
+- Empty class attributes now removed when `keepClasses` is disabled
+- Replaced legacy DOM operations with native PHP 8 methods:
+  - `isWhitespaceInElementContent()` for whitespace detection
+  - `firstElementChild` and `previousElementSibling` for DOM traversal
+- Updated Docker test environment to support PHP 8.1-8.4
+
+## [v3.2.0](https://github.com/fivefilters/readability.php/releases/tag/v3.2.0)
+- Update dependencies to newer versions (League/URI version 7), to make it compatible with projects already relying on those versions
+- Minimum PHP version set to 8.1 (required by League/URI 7)
+- Update Docker tests to use PHP 8.1, 8.2 and 8.3
+
+## [v3.1.7](https://github.com/fivefilters/readability.php/releases/tag/v3.1.7)
+- Fixes URL syntax errors when bad URLs are encountered when rewriting relative URLs - reported by @marcelklehr
+- Fixes PHP 8 deprecation notice when base URLs (used for rewriting relative URLs) don't have a path component - thanks to @blat and @Markus-GS
+
+## [v3.1.6](https://github.com/fivefilters/readability.php/releases/tag/v3.1.6)
+- Avoid re-parsing source HTML when making multiple attempts to identify content in parse()
+
+## [v3.1.5](https://github.com/fivefilters/readability.php/releases/tag/v3.1.5)
+- Allow psr/log version 2.x and 3.x - thanks to @piotrek-r and @ArondeParon
+
+## [v3.1.4](https://github.com/fivefilters/readability.php/releases/tag/v3.1.4)
+- Fixes improper use of null coalescing operator - reported by @thedf
+
+## [v3.1.3](https://github.com/fivefilters/readability.php/releases/tag/v3.1.3)
+- Fixes issue where exception was thrown when resolving an invalid relative URL (when setFixRelativeURLs(true)) - reported by @jeffbotw
+
+## [v3.1.2](https://github.com/fivefilters/readability.php/releases/tag/v3.1.2)
+- Fixes issue "Warning: Undefined array key 2" reported by @castroCrea
+- Fixes issue "Notice: Trying to get property '' of non-object" reported by @thedf
+
+## [v3.1.1](https://github.com/fivefilters/readability.php/releases/tag/v3.1.1)
+- Exclude tests folder when using composer
+
+## [v3.1.0](https://github.com/fivefilters/readability.php/releases/tag/v3.1.0)
+- Minimum PHP version 7.4 (composer.json updated)
+- Updated the Docker file to support versions of PHP from 7.4 to 8.1
+- Updated the Docker file to allow you to run PHP with libxml 2.9.10, 2.9.13, 2.9.14
+- Test with PHP 8.1
+
+## [v3.0.0](https://github.com/fivefilters/readability.php/releases/tag/v3.0.0)
+- Implemented changes made to Readability.js up to 26 August 2021, with the exception of a [piece of code](https://github.com/fivefilters/readability.php/commit/1c662465bded2ab3acf3b975a1315c8c45f0bf73#diff-b9b31807b1a39caec18ddc293e9c52931ba8b55191c61e6b77a623d699a599ffR1899) which doesn't produce the same results in PHP for us compard to the JS version.
+- Default parser is now HTML5-PHP, which handles HTML better than libxml
+- Replaced the expected HTML files in the tests folder to reflect HTML5-PHP's serialisation
+- Updated the Docker file to support versions of PHP from 7.3 to 8.0 (previously it was 7.0 to 7.3)
+- Updated the Docker file to allow you to run PHP with libxml 2.9.4, 2.9.5, 2.9.10, and 2.9.12
+- Fatal error bug fix (thanks Balazsp)
 
 ## [v2.1.0](https://github.com/andreskrey/readability.php/releases/tag/v2.1.0)
 - Avoid overwriting extracted metadata with similarly named keys (like `og:image` and `og:image:width`)

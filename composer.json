@@ -1,20 +1,25 @@
 {
-	 "minimum-stability": "dev",
-	 "prefer-stable": true,
-    "repositories": [
-        {
-	        "name": "fivefilters/readability.php",
-	        "type": "vcs",
-	        "url": "https://dev.tt-rss.org/fox/readability-php.git"
-        },
-        {
-	        "name": "masterminds/html5",
-	        "type": "vcs",
-	        "url": "https://dev.tt-rss.org/fox/html5-php.git"
-        }
-    ],
-    "require": {
-        "fivefilters/readability.php": "dev-master",
-		  "psr/http-factory": "1.0.1"
-    }
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"name": "fivefilters/readability.php",
+			"type": "vcs",
+			"url": "https://github.com/fivefilters/readability.php.git"
+		},
+		{
+			"name": "masterminds/html5",
+			"type": "vcs",
+			"url": "https://github.com/Masterminds/html5-php.git"
+		}
+	],
+	"config": {
+		"platform": {
+			"php": "8.1.0"
+		}
+	},
+	"require": {
+		"fivefilters/readability.php": "*",
+		"psr/http-factory": "1.0.1"
+	}
 }

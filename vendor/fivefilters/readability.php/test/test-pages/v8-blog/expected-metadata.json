@@ -1,8 +1,0 @@
-{
-    "Author": null,
-    "Direction": null,
-    "Excerpt": "Emscripten now supports standalone Wasm files, which do not need JavaScript.",
-    "Image": null,
-    "Title": "standalone WebAssembly binaries using Emscripten \u00b7 V8",
-    "SiteName": null
-}
