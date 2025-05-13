@@ -1,3 +1,7 @@
+<?php
+declare(strict_types=1);
+/** @var Af_ReadabilityExtension $this */
+?>
 <form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
 <input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 

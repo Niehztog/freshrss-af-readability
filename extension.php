@@ -14,7 +14,7 @@ class Af_ReadabilityExtension extends Minz_Extension {
 	public function init() {
 
 		$this->registerHook('entry_before_insert', array($this, 'processArticle'));
-		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
+		Minz_View::appendStyle($this->getFileUrl('style.css'));
 	}
 
 	public function processArticle($article) {
@@ -36,7 +36,7 @@ class Af_ReadabilityExtension extends Minz_Extension {
 
 		$contentTest = trim(strip_tags($extractedContent));
 
-		if ($contentTest) {
+		if (!empty($contentTest)) {
 			$article->_content($extractedContent);
 		}
 
@@ -51,19 +51,26 @@ class Af_ReadabilityExtension extends Minz_Extension {
 		return $this->categories;
 	}
 
-	public function loadConfigValues(){
-		if (!class_exists('FreshRSS_Context', false) || null === FreshRSS_Context::userConf()) {
+	public function loadConfigValues() {
+		if (!class_exists('FreshRSS_Context', false)) {
+			echo "Failed data";
+			return;
+		}
+		try {
+			$userConf = FreshRSS_Context::userConf();
+		}
+		catch(\Throwable $t) {
 			echo "Failed data";
 			return;
 		}
 
-		if (FreshRSS_Context::userConf()->attributeString('ext_af_readability_feeds') != '') {
-			$this->configFeeds = (array)json_decode(FreshRSS_Context::userConf()->attributeString('ext_af_readability_feeds'), true);
+		if ($userConf->attributeString('ext_af_readability_feeds') != '') {
+			$this->configFeeds = (array)json_decode($userConf->attributeString('ext_af_readability_feeds'), true);
 		} else {
 			$this->configFeeds = [];
 		}
-		if (FreshRSS_Context::userConf()->attributeString('ext_af_readability_categories') != '') {
-			$this->configCategories = (array)json_decode(FreshRSS_Context::userConf()->attributeString('ext_af_readability_categories'), true);
+		if ($userConf->attributeString('ext_af_readability_categories') != '') {
+			$this->configCategories = (array)json_decode($userConf->attributeString('ext_af_readability_categories'), true);
 		} else {
 			$this->configCategories = [];
 		}
@@ -110,6 +117,9 @@ class Af_ReadabilityExtension extends Minz_Extension {
 
 	public function extractContent(string $url): bool|string|null {
 		$ch = curl_init();
+		if(false === $ch) {
+			return false;
+		}
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
