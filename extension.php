@@ -21,6 +21,9 @@ class Af_ReadabilityExtension extends Minz_Extension
 		Minz_View::appendStyle($this->getFileUrl('style.css'));
 	}
 
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
 	public function processArticle(FreshRSS_Entry $article): FreshRSS_Entry
 	{
 		$this->loadConfigValues();
@@ -57,6 +60,9 @@ class Af_ReadabilityExtension extends Minz_Extension
 		return $this->categories;
 	}
 
+	/**
+	 * @throws Minz_PermissionDeniedException
+	*/
 	private function loadConfigValues(): void
 	{
 		if (!class_exists('FreshRSS_Context', false)) {
@@ -105,6 +111,12 @@ class Af_ReadabilityExtension extends Minz_Extension
 		return array_key_exists($id, $this->configCategories);
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PDOConnectionException
+	 * @throws Minz_PermissionDeniedException
+	 */
 	public function handleConfigureAction()
 	{
 		$feedDAO = FreshRSS_Factory::createFeedDao();
@@ -136,6 +148,9 @@ class Af_ReadabilityExtension extends Minz_Extension
 		$this->loadConfigValues();
 	}
 
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
 	private function extractContent(string $url): bool|string|null
 	{
 		if(empty($url)) {
