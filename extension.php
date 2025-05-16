@@ -4,79 +4,119 @@ require_once __DIR__ . "/vendor/autoload.php";
 use \fivefilters\Readability\Readability;
 use \fivefilters\Readability\Configuration;
 
-class Af_ReadabilityExtension extends Minz_Extension {
-
+class Af_ReadabilityExtension extends Minz_Extension
+{
+	/** @var array<int,FreshRSS_Feed> */
 	private array $feeds;
+	/** @var array<int,FreshRSS_Category> */
 	private array $categories;
+	/** @var array<int,bool> */
 	private array $configFeeds = [];
+	/** @var array<int,bool> */
 	private array $configCategories = [];
 
-	public function init() {
-
+	public function init()
+	{
 		$this->registerHook('entry_before_insert', array($this, 'processArticle'));
-		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
+		Minz_View::appendStyle($this->getFileUrl('style.css'));
 	}
 
-	public function processArticle($article) {
-
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
+	public function processArticle(FreshRSS_Entry $article): FreshRSS_Entry
+	{
 		$this->loadConfigValues();
-		if (empty($article->toArray()['id_feed'])){
-			$feedId = $article->feed(false);
-		} else {
-			$feedId = $article->toArray()['id_feed'];
-		}
+		$feedId = $article->feedId();
 
-		$categoryId = $article->feed()->category()->id();
+		$categoryId = $article->feed()?->category()?->id();
 
-		if (!array_key_exists($feedId, $this->configFeeds) && !array_key_exists($categoryId, $this->configCategories) ) {
+		if (!array_key_exists($feedId, $this->configFeeds)
+			&& (null === $categoryId || !array_key_exists($categoryId, $this->configCategories))
+		) {
 			return $article;
 		}
 
 		$extractedContent = $this->extractContent($article->link());
 
-		$contentTest = trim(strip_tags($extractedContent));
+		$contentTest = is_string($extractedContent) ? trim(strip_tags($extractedContent)) : null;
 
-		if ($contentTest) {
-			$article->_content($extractedContent);
+		if (!empty($contentTest)) {
+			$article->_content((string)$extractedContent);
 		}
 
 		return $article;
 	}
 
-	public function getFeeds() {
+	/** @return array<int,FreshRSS_Feed> */
+	public function getFeeds(): array
+	{
 		return $this->feeds;
 	}
 
-	public function getCategories() {
+	/** @return array<int,FreshRSS_Category> */
+	public function getCategories(): array
+	{
 		return $this->categories;
 	}
 
-	public function loadConfigValues(){
-		if (!class_exists('FreshRSS_Context', false) || null === FreshRSS_Context::userConf()) {
+	/**
+	 * @throws Minz_PermissionDeniedException
+	*/
+	private function loadConfigValues(): void
+	{
+		if (!class_exists('FreshRSS_Context', false)) {
 			echo "Failed data";
 			return;
 		}
+		try {
+			$userConf = FreshRSS_Context::userConf();
+		}
+		catch(\Throwable $t) {
+			Minz_Log::warning('af-readability: ' . $t->getMessage());
+			return;
+		}
 
-		if (FreshRSS_Context::userConf()->attributeString('ext_af_readability_feeds') != '') {
-			$this->configFeeds = (array)json_decode(FreshRSS_Context::userConf()->attributeString('ext_af_readability_feeds'), true);
-		} else {
-			$this->configFeeds = [];
-		}
-		if (FreshRSS_Context::userConf()->attributeString('ext_af_readability_categories') != '') {
-			$this->configCategories = (array)json_decode(FreshRSS_Context::userConf()->attributeString('ext_af_readability_categories'), true);
-		} else {
-			$this->configCategories = [];
-		}
+		$this->configFeeds = $this->readConfigValue($userConf, 'ext_af_readability_feeds');
+		$this->configCategories = $this->readConfigValue($userConf, 'ext_af_readability_categories');
 	}
 
-	public function getConfigFeeds($id) {
+	/** @return array<int,bool> */
+	private function readConfigValue(FreshRSS_UserConfiguration $userConf, string $configKey): array
+	{
+		if('' === $configKey) {
+			return [];
+		}
+		$value = $userConf->attributeString($configKey);
+		if ($value == '') {
+			return [];
+		}
+
+		$decoded = (array)json_decode($value, true);
+		$result = [];
+		foreach($decoded as $key => $param) {
+			$result[(int)$key] = (bool) $param;
+		}
+
+		return $result;
+	}
+
+	public function getConfigFeeds(int $id): bool
+	{
 		return array_key_exists($id, $this->configFeeds);
 	}
 
-	public function getConfigCategories($id) {
+	public function getConfigCategories(int $id): bool
+	{
 		return array_key_exists($id, $this->configCategories);
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PDOConnectionException
+	 * @throws Minz_PermissionDeniedException
+	 */
 	public function handleConfigureAction()
 	{
 		$feedDAO = FreshRSS_Factory::createFeedDao();
@@ -108,8 +148,19 @@ class Af_ReadabilityExtension extends Minz_Extension {
 		$this->loadConfigValues();
 	}
 
-	public function extractContent(string $url): bool|string|null {
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
+	private function extractContent(string $url): bool|string|null
+	{
+		if(empty($url)) {
+			return false;
+		}
+
 		$ch = curl_init();
+		if(false === $ch) {
+			return false;
+		}
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -127,39 +178,43 @@ class Af_ReadabilityExtension extends Minz_Extension {
 		}
 		curl_close($ch);
 
-		if ($response && mb_strlen($response) < 1024 * 500) {
-			$document = new DOMDocument("1.0", "UTF-8");
+		if (!is_string($response) || mb_strlen($response) > 1024 * 500) {
+			return false;
+		}
 
-			libxml_use_internal_errors(true);
-			if (!$document->loadHTML('<?xml encoding="UTF-8">' . $response)) {
-				libxml_clear_errors();
-				return false;
-			}
+		$document = new DOMDocument("1.0", "UTF-8");
+
+		libxml_use_internal_errors(true);
+		if (!$document->loadHTML('<?xml encoding="UTF-8">' . $response)) {
 			libxml_clear_errors();
+			return false;
+		}
+		libxml_clear_errors();
 
-			if (strtolower($document->encoding) != 'utf-8') {
-				$response = preg_replace("/<meta.*?charset.*?\/?>/i", "", $response);
-				if (empty($document->encoding)) {
-					$response = mb_convert_encoding($response, 'utf-8');
-				} else {
-					$response = mb_convert_encoding($response, 'utf-8', $document->encoding);
-				}
+		if (null === $document->encoding || strtolower($document->encoding) !== 'utf-8') {
+			$responseReplaced = preg_replace("/<meta.*?charset.*?\/?>/i", "", $response);
+			$response = null !== $responseReplaced ? $responseReplaced : $response;
+			if (empty($document->encoding)) {
+				$response = mb_convert_encoding($response, 'utf-8');
+			} else {
+				$response = mb_convert_encoding($response, 'utf-8', $document->encoding);
 			}
+		}
 
-			try {
-				$r = new Readability(new Configuration([
-					'FixRelativeURLs'      => true,
-					'OriginalURL'          => $url,
-					'ExtraIgnoredElements' => ['template'],
-				]));
+		try {
+			$r = new Readability(new Configuration([
+				'FixRelativeURLs' => true,
+				'OriginalURL' => $url,
+				'ExtraIgnoredElements' => ['template'],
+			]));
 
-				if ($r->parse($response)) {
-					return $r->getContent();
-				}
-
-			} catch (Exception $e) {
-				return false;
+			if ($r->parse($response)) {
+				return $r->getContent();
 			}
+		}
+		catch(\Throwable $t) {
+			Minz_Log::warning('af-readability: ' . $t->getMessage());
+			return false;
 		}
 
 		return false;

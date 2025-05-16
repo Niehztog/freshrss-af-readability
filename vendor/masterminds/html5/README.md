@@ -1,3 +1,19 @@
+> # UKRAINE NEEDS YOUR HELP NOW!
+>
+> On 24 February 2022, Russian [President Vladimir Putin ordered an invasion of Ukraine by Russian Armed Forces](https://www.bbc.com/news/world-europe-60504334).
+>
+> Your support is urgently needed.
+>
+> - Donate to the volunteers. Here is the volunteer fund helping the Ukrainian army to provide all the necessary equipment:
+>  https://bank.gov.ua/en/news/all/natsionalniy-bank-vidkriv-spetsrahunok-dlya-zboru-koshtiv-na-potrebi-armiyi or https://savelife.in.ua/en/donate/
+> - Triple-check social media sources. Russian disinformation is attempting to coverup and distort the reality in Ukraine.
+> - Help Ukrainian refugees who are fleeing Russian attacks and shellings: https://www.globalcitizen.org/en/content/ways-to-help-ukraine-conflict/
+> -  Put pressure on your political representatives to provide help to Ukraine.
+> -  Believe in the Ukrainian people, they will not surrender, they don't have another Ukraine.
+>
+> THANK YOU!
+----
+
 # HTML5-PHP
 
 HTML5 is a standards-compliant HTML5 parser and writer written entirely in PHP.
@@ -14,7 +30,7 @@ HTML5 provides the following features.
 - Interoperability with [QueryPath](https://github.com/technosophos/querypath)
 - Runs on **PHP** 5.3.0 or newer
 
-[![Build Status](https://travis-ci.org/Masterminds/html5-php.png?branch=master)](https://travis-ci.org/Masterminds/html5-php)
+[![CI](https://github.com/Masterminds/html5-php/actions/workflows/ci.yaml/badge.svg)](https://github.com/Masterminds/html5-php/actions/workflows/ci.yaml)
 [![Latest Stable Version](https://poser.pugx.org/masterminds/html5/v/stable.png)](https://packagist.org/packages/masterminds/html5)
 [![Code Coverage](https://scrutinizer-ci.com/g/Masterminds/html5-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Masterminds/html5-php/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Masterminds/html5-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Masterminds/html5-php/?branch=master)
@@ -173,7 +189,7 @@ issues known issues that are not presently on the roadmap:
 - Scripts: This parser does not contain a JavaScript or a CSS
   interpreter. While one may be supplied, not all features will be
   supported.
-- Rentrance: The current parser is not re-entrant. (Thus you can't pause
+- Reentrance: The current parser is not re-entrant. (Thus you can't pause
   the parser to modify the HTML string mid-parse.)
 - Validation: The current tree builder is **not** a validating parser.
   While it will correct some HTML, it does not check that the HTML
