@@ -8,7 +8,12 @@ This FreshRSS extension uses the [Fivefilters Readability.php library](https://g
 - Preserves original formatting when possible
 
 ## Requirements
-- PHP 8.1+, ext-dom, ext-xml, and ext-mbstring
+- PHP 8.1+-
+- ext-dom
+- ext-xml
+- ext-curl
+- ext-mbstring
+(verify by `php -m` and `php -v` in the webserver's terminal or check the phpinfo output)
 
 ## Installation
 
@@ -56,6 +61,9 @@ To reprocess existing articles:
   1. Go to "Manage" → "Archiving" → "Delete all articles" (consider this step carefully)
   2. Refresh your feeds to fetch articles again
 - "Clear cache" won't reprocess existing articles
+
+## Limitations
+Some web servers temporarily block too many subsequent HTTP requests from the same IP address. In the case of af_readability, the plugin tries to fetch multiple URLs from all new feed items one after the other without delay. This is often the reason why some article contents are not displayed properly.
 
 ## Troubleshooting
 
