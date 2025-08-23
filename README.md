@@ -13,6 +13,7 @@ This FreshRSS extension uses the [Fivefilters Readability.php library](https://g
 - ext-xml
 - ext-curl
 - ext-mbstring
+
 (verify by `php -m` and `php -v` in the webserver's terminal or check the phpinfo output)
 
 ## Installation
