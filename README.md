@@ -8,7 +8,7 @@ This FreshRSS extension uses the [Fivefilters Readability.php library](https://g
 - Preserves original formatting when possible
 
 ## Requirements
-- PHP 8.1+-
+- PHP 8.1+
 - ext-dom
 - ext-xml
 - ext-curl
