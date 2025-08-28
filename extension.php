@@ -202,11 +202,11 @@ class Af_ReadabilityExtension extends Minz_Extension
 		}
 
 		try {
-			$r = new Readability(new Configuration([
+			$r = new Readability((new Configuration([
 				'FixRelativeURLs' => true,
 				'OriginalURL' => $url,
 				'ExtraIgnoredElements' => ['template'],
-			]));
+			]))->setLogger(new LoggerBridge()));
 
 			if ($r->parse($response)) {
 				return $r->getContent();
@@ -219,4 +219,52 @@ class Af_ReadabilityExtension extends Minz_Extension
 
 		return false;
 	}
+}
+
+class LoggerBridge implements \Psr\Log\LoggerInterface {
+
+    public function emergency(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_EMERG, null);
+    }
+
+    public function alert(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_ALERT, null);
+    }
+
+    public function critical(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_CRIT, null);
+    }
+
+    public function error(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_ERR, null);
+    }
+
+    public function warning(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_WARNING, null);
+    }
+
+    public function notice(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_WARNING/*LOG_NOTICE*/, null);
+    }
+
+    public function info(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_WARNING/*LOG_INFO*/, null);
+    }
+
+    public function debug(\Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, LOG_WARNING/*LOG_DEBUG*/, null);
+    }
+
+    public function log($level, \Stringable|string $message, array $context = []): void
+    {
+        Minz_Log::record($message, $level, null);
+    }
 }
