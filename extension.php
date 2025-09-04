@@ -164,6 +164,7 @@ class Af_ReadabilityExtension extends Minz_Extension
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_USERAGENT, FRESHRSS_USERAGENT);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
 			'Accept: text/*',
 			'Content-Type: text/html'
