@@ -1,0 +1,16 @@
+body: //article/div[@data-component="ArticleWeb"]
+
+strip: //aside
+strip: //button
+strip: //header/div[contains(@class, 'Headline_meta')]
+strip: //div[contains(@class, 'ArticleWeb_publishedDate')]
+strip: //div[contains(@class, 'ArticleWeb_shareBottom')]/self::div | //div[contains(@class, 'ArticleWeb_shareBottom')]/following-sibling::*
+strip: //div[contains(@aria-label, 'media') and contains(@aria-label, 'embed')]
+
+prune: no
+
+test_url: https://www.abc.net.au/news/2013-04-30/credit-growth-remains-subdued/4660054
+test_url: https://www.abc.net.au/news/2013-03-27/open-speed-highways-change-clp-giles/4597892
+
+test_url: https://www.abc.net.au/news/2023-06-16/fact-check-jacinta-nampijinpa-price-secret-documents-niaa/102485040
+test_contains: widespread but bogus claim about a list of secret "demands" linked to the Voice referendum

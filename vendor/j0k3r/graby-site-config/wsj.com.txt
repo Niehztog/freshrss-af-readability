@@ -1,0 +1,119 @@
+# Site uses JavaScript, API-calls and/or techniques to prevent content catching, so...
+
+# This works NOT with ftr.fivefilters.net (FTR|Fulltext-RSS)
+# This works NOT with wallabag UI
+
+# This only works with wallabagger browser-plugin with activated
+# option 'Retrieve content from the browser' in it's settings.
+# Scroll down to the bottom of article before clicking on the wallabagger icon!
+
+http_header(User-agent): Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0
+http_header(referer): https://www.wsj.com
+
+body: //main//article/div[contains(concat(' ',normalize-space(@class),' '),' crawler ')] | //main//div[contains(@class, 'article-header')]
+body: //main
+body: //article
+
+author: //a[contains(@class, 'AuthorLink')]
+
+## neededed for non-amp-version and wallabagger with wsj-subscription
+strip_id_or_class: article-body-tools
+strip_id_or_class: print-header
+strip_id_or_class: controls-container
+strip_id_or_class: category
+strip_id_or_class: aside-container
+strip_id_or_class: uds-ad-container
+
+strip: //div[contains(@class, 'ribbon-container')]/parent::div
+strip: //div[contains(@class, 'AuthoringContainer')]
+strip: //div[@data-inset_type='newsletterinset']
+strip: //div[@class='audioplayer' and @id='articlereader']
+strip: //picture/@source
+strip: //button
+strip: //nav
+strip: //svg
+strip: //main/div/article//section[last()]/following-sibling::*
+strip: //div[contains(@class, 'article-byline')]/parent::div
+strip: //h1[1]
+strip: //div[@aria-label='Sponsored Offers']
+strip: //div[@aria-label='What to Read Next']
+strip: //div[@aria-label='Utility Bar']
+strip: //div[@data-type='inset']
+strip: //iframe
+
+
+# video will not be shown, but we can show the URL to the video as text
+strip_id_or_class: jw-hidden-accessibility
+strip_id_or_class: jw-shortcuts-tooltip
+strip_id_or_class: jw-controlbar
+strip_id_or_class: jw-text
+strip_id_or_class: jw-rightclick
+strip: //div[contains(@class, '_hoverText_')]
+replace_string(<textarea): <a
+replace_string(</textarea>): </a>
+strip: //textarea[contains(text(), 'video-api.wsj.com/')]
+strip: //a[contains(text(), 'video-api.wsj.com/')]
+
+
+### old ???
+
+body: //main[@id="main"]//div[@itemprop="articleLead" or @itemprop="articleBody" or contains(concat(' ',normalize-space(@class),' '),' articleBody ')]
+
+## Use AMP version ## DOES NOT WORK ANY LONGER ! ##
+
+#single_page_link: concat('https://www.wsj.com/amp/articles/', substring-after(substring-after(//link[@rel="canonical"]/@href, 'https://www.wsj.com/'), '/'))
+#if_page_contains: //link[@rel="canonical" and not( contains(substring-after(substring-after(@href, 'https://www.wsj.com/'), '/'), '/') )]
+
+#single_page_link: concat('https://www.wsj.com/amp/articles/', substring-after(substring-after(substring-after(//link[@rel="canonical"]/@href, 'https://www.wsj.com/'), '/'), '/'))
+#if_page_contains: //link[@rel="canonical" and not( contains(substring-after(substring-after(substring-after(@href, 'https://www.wsj.com/'), '/'), '/'), '/') )]
+
+#single_page_link: concat('https://www.wsj.com/amp/articles/', substring-after(substring-after(substring-after(substring-after(//link[@rel="canonical"]/@href, 'https://www.wsj.com/'), '/'), '/'), '/'))
+#if_page_contains: //link[@rel="canonical" and not( contains(substring-after(substring-after(substring-after(@href, 'https://www.wsj.com/'), '/'), '/'), '/') )]
+
+title: //meta[@property="og:title"]/@content
+body: //div[@id='wsj-article-wrap']
+# is this still used?
+body: //div[@id='article_story_body']
+
+author: //meta[@name="author"]/@content
+# for slide show content
+body: //ul[@id='imageSlide']//li[@class='firstSlide']//img | (//div[@class='txt_body']//p)[1]
+date: //meta[@itemprop="dateCreated"]/@content
+
+strip_id_or_class: insetFullBracket
+strip_id_or_class: newsletter-inset
+strip_id_or_class: insettipBox
+#strip_id_or_class: legacyInset
+strip_id_or_class: recipeACShopAndBuyText
+strip_id_or_class: article__byline
+strip_id_or_class: type-InsetMediaVideo
+strip_id_or_class: wsj-ad
+strip_id_or_class: bylineWrap
+strip: //amp-iframe
+strip: //*[@amp-access-hide]
+
+strip: //div[contains(@class, 'insetContent')]//cite
+strip: //*[contains(@style, 'visibility: hidden;')]
+strip: //div[contains(@class, 'insetContent') and not(contains(@class, 'image'))]
+strip: //div[contains(@class, 'carousel')]
+strip: //div[div[contains(@class, 'media-object-rich-text') and h4 and ul[@class="articleList"]]]
+strip: //div[contains(@class, 'snippet')]
+strip: //div[contains(@class, 'media-object-video')]
+
+# see https://elaineou.com/2017/01/19/how-the-twitter-app-bypasses-paywalls/
+#http_header(user-agent): Mozilla/5.0 (iPhone; CPU iPhone OS 10_2 like Mac OS X) AppleWebKit/602.1.32 (KHTML, like Gecko) Mobile/14C92 Twitter for iPhone
+#http_header(referer): https://t.co/T1323aaaa
+
+prune: no
+tidy: no
+
+test_url: http://www.wsj.com/articles/airasia-flight-8501-tail-recovered-1420878809
+test_contains: Saturday evening that the black boxes
+test_url: http://www.wsj.com/news/articles/SB10001424052702304626304579509100018004342
+test_url: http://www.wsj.com/article/SB10001424052970203363504577185322849515102.html
+# slide show
+test_url: http://www.wsj.com/article/SB10001424052970204791104577110550376458164.html
+test_url: https://www.wsj.com/articles/what-the-world-will-speak-in-2115-1420234648
+test_url: https://www.wsj.com/articles/our-amazingly-plastic-brains-1423262095
+test_url: https://www.wsj.com/articles/the-biggest-money-mistakes-we-makedecade-by-decade-1477275181
+test_url: https://www.wsj.com/articles/russia-figure-skating-world-championships-11646143414

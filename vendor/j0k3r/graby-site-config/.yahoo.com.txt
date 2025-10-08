@@ -1,0 +1,24 @@
+# same a yahoo.com.txt
+
+title: //meta[@property="og:title"]/@content
+body: //article[@itemprop="articleBody"]
+body: //div[@class='caas-img-container'] | //div[@class='caas-body']
+
+strip_id_or_class: img-mask
+strip_id_or_class: StretchedBox
+#strip_image_src: spaceball.gif
+strip: //button
+
+find_string: itemprop="url" style="background-image:url( 
+replace_string: itemprop="url" src="
+find_string: );" src="https://s.yimg.com/g/images/spaceball.gif"
+replace_string: "
+
+# imidiate instead lazy load images
+find_string: data-src=http
+replace_string: src=http
+
+prune: no
+
+test_url: https://news.yahoo.com/disneys-new-theme-park-disability-policy-sparks-anger-231613241.html
+test_url: https://finance.yahoo.com/news/rivian-denies-media-report-production-203727786.html

@@ -1,0 +1,13 @@
+title: //h1
+
+body: //div[contains(concat(' ',normalize-space(@class),' '),' _templateArticle_')]
+
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' _articleHeader_')]
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' _socialMedia_')]
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' _cardsRelatedContent_')]
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' _newsletter_')]
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' _cards_')]
+
+test_url: https://www.indiewire.com/criticism/shows/fantasmas-review-juilo-torres-fierce-satire-1235017376/
+test_url: https://www.indiewire.com/features/general/10-new-tv-shows-to-watch-2025-1235079729/
+test_url: https://www.indiewire.com/gallery/unsimulated-sex-scenes-movies/

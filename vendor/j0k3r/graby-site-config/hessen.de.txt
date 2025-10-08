@@ -1,0 +1,28 @@
+# author: HolgerAusB   version 2023-08-11
+#
+# weekly newsletter of the State of Hesse (Germany)
+
+body: //div[@class='outer']
+date: //div[@class='sidebar']/div/div/span
+author: 'Hessische Landesregierung'
+
+# strip header
+strip: (//div[@class='sidebar'])[1]
+strip: //h2[contains(text(), 'Newsletter')]/ancestor::table[1]
+
+# strip footer modules
+strip_id_or_class: topic-module
+strip_id_or_class: contact-module
+strip_id_or_class: footer
+
+# more cleanups
+strip: //img[contains(@src, '/mail/icon_link')]
+strip: //table[@class="link-tile"]/@height
+strip: //table[@class="link-tile"]/@style
+strip_id_or_class: spacer
+
+prune: no
+tidy: no
+
+test_url: https://www.hessen.de/newsletter-feed
+test_url: https://hessen.de/node/10963/newsletter-preview

@@ -1,0 +1,36 @@
+title: //h1[contains(@class, 'article-title')]
+author: //div[@id="page-gtm-values"]/div[contains(@class, 'keyvals')]/@data-content_author_name
+author: //article//span[contains(@class, 'byline')]
+date: //div[@id="page-gtm-values"]/div[contains(@class, 'keyvals')]/@data-content_published_date
+date: //time[@pubdate]/@datetime
+body: //div[@id="article-body"]
+# Old, remove?
+body: //section[contains(@class, 'article-body')]
+prune: no
+tidy: no
+
+find_string: data-src="
+replace_string: data-src-disabled="
+
+find_string: <noscript>
+replace_string: <!-- noscript -->
+find_string: </noscript>
+replace_string: <!-- /noscript -->
+
+#Skip GDPR tracking wall
+http_header(Cookie): euConsent=true
+
+strip_id_or_class: jumpstart-video
+strip_id_or_class: inline-recirc
+strip_id_or_class: most-popular-feed
+strip_id_or_class: newsletter-callout
+strip_id_or_class: author-feedback-text
+strip_id_or_class: article-bottom
+strip_id_or_class: video-jw
+strip_id_or_class: ad-container
+
+strip: //figcaption
+strip: //p[starts-with(., 'Read More:') and ./a]
+strip: //aside
+
+test_url: http://time.com/14478/emotions-may-not-be-so-universal-after-all/

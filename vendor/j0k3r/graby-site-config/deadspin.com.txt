@@ -1,0 +1,17 @@
+body: //div[contains(@class, 'js_post-content')]
+strip: //div[contains(@class, 'share-tools')]
+strip_id_or_class: share-tools-buttons-inpost
+strip_id_or_class: instream-native-video
+strip_id_or_class: js_related-stories-inset
+strip_id_or_class: js_ad-mobile-dynamic
+strip_id_or_class: ad-mobile-dynamic
+strip_id_or_class: movable-ad
+strip_id_or_class: ad-uni
+strip_id_or_class: js_newsletter-form-inline
+strip_id_or_class: js_commerce-inset-permalink
+
+#TODO investigate why HTML5-PHP doesn't work
+parser: libxml
+
+test_url: https://deadspin.com/everythings-going-great-with-the-skins-why-do-you-ask-1831070342
+test_url: https://deadspin.com/rss

@@ -1,0 +1,67 @@
+# complete feed:
+# https://www.diepresse.com/rss
+
+# or add a category, e.g.:
+# https://www.diepresse.com/rss/kultur/kunst
+
+title: //article/h1[1]
+title: //div[@class='article']/h1
+date: substring-before(//p[@class='articletime'],'|')
+author: //meta[@name='cXenseParse:author']/@content
+author: //div[@class='author']/descendant::a
+body: //article | //div[@id='articletext'] | //div[@id='article-body']
+
+strip: //div[@class='meta__date']
+strip: //div[@class='meta__authors']
+strip: //article/h1[1]
+strip: //div[contains(@class, 'fm-relation')]
+strip: //div[@class='vued']
+strip: //svg
+strip: //button
+
+strip_id_or_class: skyline
+strip_id_or_class: article__actions
+strip_id_or_class: article__byline
+strip_id_or_class: article__breadcrumbs
+
+# strip gerneric text images when there is no article photo/image
+
+find_string: https://www.diepresse.com/assets_v2/images/
+replace_string:
+
+# 'data-src' sometimes prevents images to load, replaced with 'src'
+
+find_string: class="figure__image lazyload" data-src=
+replace_string: class="figure__image lazyload" src=
+
+find_string: <gallery-inline
+replace_string: <div
+
+#################
+# change path for images to get rid of the text overlays
+
+find_string: /alternates/DPR_SOCIAL_NACHRICHTEN_PAID/
+replace_string: /alternates/ORIGINAL/
+
+find_string: /alternates/DPR_SOCIAL_NACHRICHTEN/
+replace_string: /alternates/ORIGINAL/
+
+find_string: /alternates/DPR_SOCIAL_MAGAZIN_PAID/
+replace_string: /alternates/ORIGINAL/
+
+find_string: /alternates/DPR_SOCIAL_MAGAZIN/
+replace_string: /alternates/ORIGINAL/
+
+find_string: /alternates/DPR_SOCIAL_MEINUNG_PAID/
+replace_string: /alternates/ORIGINAL/
+
+find_string: /alternates/DPR_SOCIAL_MEINUNG/
+replace_string: /alternates/ORIGINAL/
+
+#################
+
+prune: no
+
+test_url: https://www.diepresse.com/701905/tibeter-proteste-nonne-verbrennt-sich-selbst
+test_url: https://www.diepresse.com/18570374/all-eyes-on-kate-royale-rueckkehr-bei-koenig-charles-geburtstagsparade
+test_url: https://www.diepresse.com/rss/panorama/wien

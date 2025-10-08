@@ -1,0 +1,15 @@
+title: //meta[@property="og:title"]/@content
+body: //article
+
+strip_id_or_class: image-credit
+strip_id_or_class: noAutolink
+strip_id_or_class: related
+strip_id_or_class: sponsor
+strip_id_or_class: sharebarWrapper
+strip_id_or_class: collections-topics-and-tags
+
+prune: no
+tidy: no
+
+test_url: https://www.cnet.com/tech/services-and-software/lots-more-americans-are-using-chatgpt-but-a-surprising-number-say-they-havent-heard-of-it/
+test_url: https://www.cnet.com/tech/services-and-software/best-ai-image-generators/

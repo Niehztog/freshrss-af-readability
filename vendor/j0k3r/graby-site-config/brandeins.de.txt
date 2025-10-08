@@ -1,0 +1,9 @@
+body: //main
+strip_id_or_class: breadcrumbs-absolute
+strip_id_or_class: iqadtile16
+strip: //aside
+
+
+test_url: http://www.brandeins.de/archiv/2015/fuehrung/ministry-group-mach-doch-mal-ne-ansage/
+test_url: https://www.brandeins.de/magazine/brand-eins-wirtschaftsmagazin/2020/unterhaltung/explosion-der-kreativitaet
+test_contains: Disney und Warner mit HBO Max

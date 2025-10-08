@@ -1,0 +1,16 @@
+body: //main[1]
+
+strip_id_or_class: h1t4jafr
+strip_id_or_class: aa0wqkc
+strip_id_or_class: se0hen3
+
+strip: //hr
+strip: //div[@data-testid='topic-tags']
+strip: //div[@data-testid='heute-übersichtmodul']
+
+replace_string(<button): <div
+replace_string(</button): </div
+
+prune: no
+
+test_url: https://www.zdf.de/nachrichten/wirtschaft/volkswagen-china-hacking-industriespionage-emobilitaet-100.html

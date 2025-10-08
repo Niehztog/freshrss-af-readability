@@ -1,0 +1,28 @@
+author: //div[@class='byline']//a
+date: //meta[@property='article:published_time']/@content
+body: //figure[@class='jumbotron'] | //div[@itemprop='body']
+body: //div[contains(concat(' ',normalize-space(@class),' '),' post__main ')]
+
+prune: no
+
+strip: //h1[@class='post__title']
+strip_id_or_class: eyebrow
+strip_id_or_class: post__footer
+strip_id_or_class: social__list
+strip: //aside
+
+#ads
+strip_id_or_class: ad-wrapper
+strip_id_or_class: adInserts_0
+
+#lazyload
+find_string: data-src="
+replace_string: src="
+
+replace_string(<h2 class="post__deck">): <p>
+replace_string(</h2>): </p>   
+
+test_url: http://www.fastcompany.com/3000226/link-between-quietness-and-productivity
+test_contains: Some of you may have tried to reach me this morning
+test_url: http://www.fastcompany.com/3003586/6-simple-rituals-reach-your-potential-every-day
+test_url: https://www.fastcompany.com/90342223/the-newest-hot-coworking-space-costs-just-2-25-an-hour-because-it-is-a-parking-spot

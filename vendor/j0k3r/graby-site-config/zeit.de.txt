@@ -1,0 +1,103 @@
+tidy: no
+prune: no
+
+# As of 2020, this cookie is required
+# The value can be anything, as long as it is set at all
+http_header(Cookie): zonconsent=2022-09-03T19:45:59.150Z
+
+# Pretending to be the Google bot disables the paywall banner for now
+http_header(user-agent): Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+
+# Figures are wrapped in a noscript tag which is itself wrapped in a
+# conditional comment. Feed readers will fail to parse this correctly
+# so get rid of the noscript tag altogether.
+replace_string(<noscript): <foo
+
+# figures sometimes have multiple versions due to theming (I think), selected by JavaScript
+# strip all image variants, but the first one
+strip:  //div[@class='g-artboard']/parent::div/div[position() > 1]
+
+title: //meta[@property='og:title']/@content
+date: //meta[@name='date']/@content
+
+strip: //span[@class='figure__copyright']
+strip: //aside
+strip: //nav
+
+# prevent using 'zeit' logo if article has no image
+insert_detected_image: no
+
+# Self advertisements
+strip: //figure[@class='figure-stamp']
+strip: //a[contains(@title, 'Dieser Text ')]
+strip: //a[contains(@title, 'Dieser Artikel ')]
+strip: //span[@class='figure__text']/text()[contains(., 'Dieser Text ')]
+strip: //span[@class='figure__text']/text()[contains(., 'Dieser Artikel ')]
+strip_id_or_class: ad-container
+
+#######################################
+# ZEIT:
+#######################################
+
+single_page_link: //a[contains(@class, 'article-pagination__all-pages')] 
+next_page_link: //a[contains(@class, 'article-pagination__button')]
+author: //a[@class='byline__author']/span
+author: substring-after(//span[@class='metadata__source'], 'Quelle: ')
+
+body: //header//img | //div[@class='summary' or contains(@class, 'article-body') or @class='byline']
+body: //main/article/div[@itemprop='articleBody']
+body: //main/article[1]
+body: //div[contains(concat(' ',normalize-space(@class),' '),' article-page ')]
+
+strip: //h2[@class='visually-hidden']
+strip: //a[@href='#']
+strip: //form[@id='newsletter-teaser-form']
+strip_id_or_class: 'article-pagination article__item'
+strip_id_or_class: js-videoplayer
+strip: //figure[@data-video-provider="brightcove"]
+strip: //a[contains(concat(' ',normalize-space(@class),' '),' faq-link ')]
+strip_id_or_class: embed-wrapper__inner
+strip_id_or_class: article-footer
+strip_id_or_class: zplus-badge
+strip: //footer
+
+# needed for wallabag, without that, everything after
+# the embedded content is missing. And now you have youtube inside ;-)
+# https://www.zeit.de/politik/ausland/2023-10/israel-hamas-gaza-reaktionen-usa-eu-scholz
+find_string: <script class="raw__source"
+replace_string: <div
+
+
+test_url: http://www.zeit.de/kultur/film/2012-12/Kurzfilmtag
+test_contains: In drei Minuten die Welt erobern
+test_url: http://www.zeit.de/sport/2016-01/darts-wm-finale-anderson-lewis/komplettansicht
+test_url: http://www.zeit.de/kultur/2015-12/selbstverwirklichung-optimierung-essay
+test_url: http://www.zeit.de/2015/51/selbstdiagnose-gesundheit-zuhause-blut-urin-selbsttest
+test_url: http://www.zeit.de/campus/2015/s2/nebenjob-master-studium-finanzierung
+test_url: https://www.zeit.de/gesellschaft/2019-12/uiguren-china-verfolgung-exil-muenchen
+
+#######################################
+# ZEIT MAGAZIN:
+#######################################
+
+next_page_link: //meta[@rel='next']/@href
+single_page_link: //li[@class='article-pager__all']/a
+
+author: //a[@class='article__head__meta__author']/span
+
+body: //main/article/div[@class='article__wrap']
+
+strip: //div[@class='article__head-wrap']//h1
+strip_id_or_class: article__socialbox
+strip_id_or_class: article__nextread nextread-base is-centered
+strip_id_or_class: js-comments
+strip_id_or_class: article__pagination is-constrained is-centered
+strip_id_or_class: article__head__meta
+
+test_url: http://www.zeit.de/zeit-magazin/2015/51/daisy-ridley-traum
+test_contains: Mein ganzes Leben lang habe
+test_url: http://www.zeit.de/zeit-magazin/2015/52/cyberstalking-internet-stalker-familie-mierau
+test_url: http://www.zeit.de/zeit-magazin/2017/46/harald-martenstein-ddr-toastbrot
+test_url: https://www.zeit.de/wissen/gesundheit/2020-10/corona-mundschutz-alltag-maske-infektionsschutz-hygiene-ratgeber-faq
+test_contains: Die bisherigen Hygieneregeln in Restaurants
+test_url: https://www.zeit.de/2024/04/landwirtschaft-indien-oeko-duenger-zukunft/komplettansicht

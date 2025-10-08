@@ -1,0 +1,4 @@
+body: //*[@id="comic"]/div/div[2]/div/span
+author: //*[@id="comic"]/div/div[2]/div/div/div[1]
+
+test_url: http://explosm.net/comics/3955/
