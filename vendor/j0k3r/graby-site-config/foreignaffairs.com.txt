@@ -1,0 +1,9 @@
+body: //div[contains(@class, 'article-content-offset')]
+
+strip_id_or_class: internal-blockquote
+strip_id_or_class: paywall-prompt
+strip: //div[@role="alert"]
+
+prune: no
+
+test_url: http://www.foreignaffairs.com/articles/138810/pierre-n-leval/the-long-arm-of-international-law

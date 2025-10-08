@@ -1,0 +1,19 @@
+author: //meta[@name="author"]/@content
+body: //article[contains(concat(' ',normalize-space(@class),' '),' post ')]
+
+strip: //header
+strip: //svg
+strip: //aside
+
+strip_id_or_class: byline
+strip_id_or_class: post-bottom
+strip_id_or_class: print:hidden
+
+#prevents FTR to load the gizmodo-logo if article has no image
+insert_detected_image: no 
+
+prune: no
+tidy: yes
+
+test_url: https://gizmodo.com/the-new-bad-tick-is-going-to-take-over-half-the-united-1831079855
+test_url: https://gizmodo.com/apple-iphone-16-review-2000500097

@@ -1,0 +1,10 @@
+http_header(user-agent): Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
+
+body: //*[@class='article-body']
+
+strip_id_or_class: continue-reading-slot
+
+prune: no
+tidy: no
+
+test_url: https://www.msn.com/en-us/news/us/mass-casualty-incident-at-us-mexico-border/ar-BB1jice0

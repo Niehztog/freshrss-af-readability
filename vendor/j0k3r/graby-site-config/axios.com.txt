@@ -1,0 +1,12 @@
+http_header(User-Agent): Mastodon/4.3.2 (http.rb/5.2.0)
+
+body: //main[@id='main-content']
+date: //meta[@name="datePublished"]/@content
+
+strip: //h1[@data-cy="story-headline"]/parent::div
+strip: //div[@data-cy="social-share-bottom"] | //div[@data-cy="social-share-bottom"]/following-sibling::*
+
+
+prune: no
+
+test_url: https://www.axios.com/2019/06/25/apple-buy-driveai

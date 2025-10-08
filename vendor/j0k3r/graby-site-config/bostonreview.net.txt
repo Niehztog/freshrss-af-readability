@@ -1,0 +1,8 @@
+body: //div[@itemprop="articleBody"]
+
+prune: no
+
+strip_id_or_class: pullquote
+
+test_url: https://bostonreview.net/articles/vivian-gornick-sex-love-and-letters-review/
+test_contains: Upon its publication, first in French in 1949

@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
 
-use \fivefilters\Readability\Readability;
-use \fivefilters\Readability\Configuration;
+use Graby\Graby;
 
 class Af_ReadabilityExtension extends Minz_Extension
 {
@@ -162,67 +161,15 @@ class Af_ReadabilityExtension extends Minz_Extension
 			return false;
 		}
 
-		$ch = curl_init();
-		if(false === $ch) {
-			return false;
-		}
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, FRESHRSS_USERAGENT);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			'Accept: text/*',
-			'Content-Type: text/html'
-		]);
-		curl_setopt($ch, CURLOPT_ACCEPT_ENCODING, '');
-		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-		curl_setopt($ch, CURLOPT_MAXFILESIZE, 1024 * 1024 * 2);
-		$response = curl_exec($ch);
-		if (curl_errno($ch)) {
-			return false;
-		}
-		$url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
-		curl_close($ch);
-
-		if (!is_string($response)) {
-			return false;
-		}
-
-		$document = new DOMDocument("1.0", "UTF-8");
-
-		libxml_use_internal_errors(true);
-		if (!$document->loadHTML('<?xml encoding="UTF-8">' . $response)) {
-			libxml_clear_errors();
-			return false;
-		}
-		libxml_clear_errors();
-
-		if (null === $document->encoding || strtolower($document->encoding) !== 'utf-8') {
-			$responseReplaced = preg_replace("/<meta.*?charset.*?\/?>/i", "", $response);
-			$response = null !== $responseReplaced ? $responseReplaced : $response;
-			if (empty($document->encoding)) {
-				$response = mb_convert_encoding($response, 'utf-8');
-			} else {
-				$response = mb_convert_encoding($response, 'utf-8', $document->encoding);
-			}
-		}
-
-		try {
-			$r = new Readability(new Configuration([
-				'FixRelativeURLs' => true,
-				'OriginalURL' => $url,
-				'ExtraIgnoredElements' => ['template'],
-			]));
-
-			if ($r->parse($response)) {
-				return $r->getContent();
-			}
-		}
+        try {
+            $graby = new Graby();
+            $result = $graby->fetchContent($url);
+        }
 		catch(\Throwable $t) {
 			Minz_Log::warning('af-readability: ' . $t->getMessage());
 			return false;
 		}
 
-		return false;
+        return $result->getHtml();
 	}
 }

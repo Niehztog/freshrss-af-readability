@@ -1,0 +1,13 @@
+http_header(user-agent): facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+body: //div[@data-test="articleBody"]
+strip: //div[contains(@data-test, "tags")]
+strip: //ul[contains(@data-test, "relatedArticles")]
+
+find_string: data-src="https://
+replace_string: src="https://
+
+strip: //button
+tidy: no
+prune: no
+
+test_url: https://www.themarker.com/magazine/2023-04-05/ty-article-magazine/.premium/00000187-2c74-ded8-ade7-ffffc7490000

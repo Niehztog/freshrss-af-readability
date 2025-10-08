@@ -1,0 +1,134 @@
+##  some parts of BBC is JavaScript only, you'll need wallabager browser
+##  plugin to catch those articles for wallabag
+
+body: //main[1]//article[1]
+body: //main[1]
+
+strip: //section[@data-component='headline-block']
+strip: //section[@data-component='byline-block']
+
+strip: //section[@data-component='links-block']
+strip: //section[@data-component='tags']/self::* | //section[@data-component='tags']/following-sibling::*
+
+strip_id_or_class: dotcom-mpu_mid
+strip: //main[1]//header[1]
+strip: //nav
+
+##
+
+body: //article[contains(@class, "-ArticleWrapper")]
+body: //article[@class='article__body'] | (//div[contains(@class, 'article__body-content')])[1]
+body: (//div[@id="story-body"])[1]
+
+# for video entries
+# 2023-07-24 - Marking line below for removal (can't see these attributes any more)
+body: //div[contains(@class, "videoInStory") or @id="meta-information"]
+# Remove video block without iframe (which appears after JS processing) - see video entry test URLs
+strip: //div[contains(@class, 'MediaPlayerWrapper') and not(.//iframe)]
+
+title: //meta[@property="og:title"]/@content
+title: //h1[@class="story-header"]
+
+date: //article//div[contains(@class, 'author-unit__container')]//span
+date: //span[@class="story-date"]/span[@class='date']
+
+# for sport site
+# 2023-07-24 - Marking for removal (can't see this attributes any more)
+date: //meta[@name='DCTERMS.created']/@content
+
+author: //meta[@name="author"]/@content
+author: //div[@id='headline']//span[@class='byline-name']
+
+# recipes, e.g. http://www.bbc.co.uk/food/recipes/mymincepies_71055
+# 2023-07-24 - Marking for removal (can't see these attributes any more)
+body: //div[contains(@class, 'hrecipe')]//div[@id='subcolumn-1']
+
+strip: //article//header
+strip: //div[contains(@class, "CommentsWrapper")]
+strip: //*[contains(@class, 'VisuallyHidden')]
+strip: //*[@data-testid='byline-role' or @data-testid='drawer-background' or @data-testid='main-footer']
+strip: //*[@data-analytics_group_name='More' or @data-analytics_group_name='Related']
+strip_image_src: grey-placeholder.png
+
+strip: //svg
+strip: //button
+
+#strip: //div[@class="story-feature narrow"]
+#strip: //div[@class="story-feature wide"]
+#strip: //div[@class="story-feature dslideshow-enclosure"]
+strip: //div[contains(@class, "story-feature") and not(contains(@class, 'full-width'))]
+strip: //span[@class="story-date"]
+#strip: //div[@class="caption body-narrow-width"]
+strip: //div[@class="warning"]//p
+strip: //div[@id='page-bookmark-links-head']
+strip: //object
+strip: //div[contains(@class, "bbccom_advert_placeholder")]
+strip: //div[contains(@class, "embedded-hyper")]
+strip: //div[contains(@class, 'market-data')]
+strip: //a[contains(@class, 'hidden')]
+strip: //div[contains(@class, 'hypertabs')]
+strip: //div[contains(@class, 'related')]
+strip: //form[@id='comment-form']
+strip: //div[contains(@class, 'comment-introduction')]
+strip: //div[contains(@class, 'share-tools')]
+strip: //div[@id='also-related-links']
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' drop-capped ')]
+
+strip: //section[@data-component="tag-list"]
+strip: //section[@data-component="see-alsos"]
+
+strip: //figcaption
+strip_id_or_class: image-and-copyright-container
+
+strip_id_or_class: article-body__pull-quote
+
+strip: //aside[contains(@class, 'sp-pullout')]
+
+strip: //section[contains(@class, 'LinksWrapper')]
+
+strip_id_or_class: share-help
+strip_id_or_class: comments_module
+
+find_string: http://ichef.bbci.co.uk/news/200/
+replace_string: http://ichef.bbci.co.uk/news/624/
+
+find_string: http://ichef.bbci.co.uk/news/304/
+replace_string: http://ichef.bbci.co.uk/news/624/
+
+find_string: http://ichef.bbci.co.uk/news/320/
+replace_string: http://ichef.bbci.co.uk/news/660/
+
+replace_string({width}{hidpi}): 624
+
+# These can now contain 'Media playback is not available on your device', rather than alternative images
+# Do we have an example article where we want to use the noscript content instead?
+#replace_string(<noscript): <div
+#replace_string(</noscript): </div
+
+native_ad_clue: //meta[@property="og:url" and contains(@content, '/sponsored/')]
+
+tidy: no
+prune: no
+
+dissolve: //h2
+
+test_url: https://www.bbc.com/worklife/article/20200121-why-procrastination-is-about-managing-emotions-not-time
+test_contains: The emotional regulation theory of procrastination
+
+test_url: http://www.bbc.com/sport/0/football/28918021
+test_contains: Cameroonian footballer Albert Ebosse has died
+
+test_url: http://www.bbc.com/sport/0/football/23224017
+
+test_url: http://www.bbc.com/news/business-15060862
+test_contains: Europe's leaders are meeting again to try
+
+
+# news feed
+test_url: http://feeds.bbci.co.uk/news/rss.xml
+# sports feed
+test_url: http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=int
+# video entry
+test_url: http://www.bbc.com/news/world-asia-22056933
+# video entry 2
+test_url: https://www.bbc.com/news/world-middle-east-66259886

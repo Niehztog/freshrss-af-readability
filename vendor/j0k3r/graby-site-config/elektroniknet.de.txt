@@ -1,0 +1,27 @@
+body: //main
+date: //meta[@name='date']/@content
+author: //meta[@name='author']/@content
+
+next_page_link: //a[@title='Eine Seite vor']
+
+strip: //aside
+strip: //div[@class='provider-multi-box']
+strip: //div[@class='list list--mb']
+strip: //nav[@class='pagination']/following-sibling::* | //nav[@class='pagination']/self::nav
+strip_id_or_class: article__header
+strip: //em[contains(text(), 'Fortsetzung des Artikels')]/preceding-sibling::hr | //em[contains(text(), 'Fortsetzung des Artikels')]/following-sibling::hr[1] | //em[contains(text(), 'Fortsetzung des Artikels')]/self::em
+strip: //h3[@class='article__heading-related']/self::h3 | //h3[@class='article__heading-related']/preceding-sibling::hr | //h3[@class='article__heading-related']/following-sibling::*
+
+# rewrite images
+find_string: <source media="
+replace_string: <img media="
+find_string: srcset="http
+replace_string: src="http
+
+# 1 page
+test_url: http://www.elektroniknet.de/elektronik-automotive/wirtschaft/aus-quattro-gmbh-wird-audi-sport-136464.html
+test_contains: etwa 1.200 Mitarbeiter an den Standorten Neckarsulm und Ingolstadt
+
+# 2 pages
+test_url: https://www.elektroniknet.de/messen-testen/sensorik/immenses-marktwachstum-fuer-halbleitersensoren-erwartet.207129.html
+test_contains: Sensorik und Automobiltechnik bilden eine Symbiose

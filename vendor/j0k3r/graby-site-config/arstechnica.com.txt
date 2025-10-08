@@ -1,0 +1,25 @@
+body: //article[1]
+author: //div[@class='author-mini-bio']//a
+author: //a[contains(@href, '/author/')]
+
+strip: //header//h1 | //header//h1/following-sibling::div[contains(@class, 'md:')] | //header//h1/preceding-sibling::div
+strip: //div[@class='author-mini-bio']/self::* | //div[@class='author-mini-bio']/following-sibling::*
+strip: //div[contains(@class, 'story-tools')]/self::* | //div[contains(@class, 'story-tools')]/following-sibling::*
+
+strip: //svg
+
+strip_id_or_class: view-comments
+strip_id_or_class: pswp-caption-content
+strip_id_or_class: related-stories
+strip_id_or_class: text-settings-dropdown-story
+
+
+prune: no
+tidy: no
+
+test_url: http://arstechnica.com/tech-policy/news/2012/02/gigabit-internet-for-80-the-unlikely-success-of-californias-sonicnet.ars
+test_url: http://arstechnica.com/apple/2005/04/macosx-10-4/
+test_url: https://arstechnica.com/features/2020/10/the-space-operating-systems-booting-up-where-no-one-has-gone-before
+test_url: https://arstechnica.com/gaming/2021/02/coders-reverse-engineer-grand-theft-autos-raw-pc-source-code/
+test_url: http://arstechnica.co.uk/science/2016/06/what-is-open-access-free-sharing-of-all-human-knowledge/
+test_url: http://arstechnica.co.uk/information-technology/2016/05/eben-moglen-gpl-online-advertising-is-becoming-a-perfect-despotism/

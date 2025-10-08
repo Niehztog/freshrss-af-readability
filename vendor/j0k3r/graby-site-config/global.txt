@@ -1,0 +1,44 @@
+# Look for Open Graph data - http://ogp.me
+title: //meta[@property="og:title"]/@content
+date: //meta[@property="article:published_time"]/@content
+# article:author is someties URL, e.g. on guardian.co.uk
+
+# Remove Google Publisher Tags: https://support.google.com/dfp_sb/answer/1649768?hl=en
+#strip_id_or_class: div-gpt-ad
+
+# Strip Google ads
+strip: //*[contains(@class, 'google-dfp-ad-wrapper')]
+
+# Strip doubleclick image ads
+strip_image_src: doubleclick.net
+
+# Strip WordPress ShareDaddy elements
+strip_id_or_class: sharedaddy
+
+# If you get chunks of Javascript code appearing in the extracted output, try uncommenting the lines below.
+# This tries to convert script tags to hidden div elements (which Full-Text RSS removes).
+# If you notice issues with this approach, please let us know.
+# A good HTML parser shouldn't cause issues, so these lines are commented out by default.
+#find_string: <script 
+#replace_string: <div style="display:none" 
+#find_string: </script>
+#replace_string: </div>
+
+# convert amp image tag to html image tag
+# this is useful if AMP JS hasn't run on source HTML to do its own replacements (see below)
+find_string: <amp-img
+replace_string: <img
+find_string: </amp-img>
+replace_string: <!-- nothing -->
+
+# if the source HTML has been modified by AMP JS, there'll be nested <img> tag in <amp-img>
+# with class i-amphtml-replaced-content. Since we do our own "replacing" above, we'll
+# end up with duplicate images if we don't remove this. So let's remove it...
+strip_id_or_class: i-amphtml-replaced-content
+
+# strip all class attributes after processing (not supported in Full-Text RSS yet)
+post_strip_attr: //*/@class
+
+# This might need re-thinking, but I don't think srcdoc attributes in <iframe srcdoc="{HTML}"> elements
+# contain relevant content, and appear to trip up some post-processing parsers, e.g. HTML Purifier.
+strip_attr: //iframe/@srcdoc

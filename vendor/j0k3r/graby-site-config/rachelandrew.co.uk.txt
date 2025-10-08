@@ -1,0 +1,6 @@
+date: //time/@datetime
+
+strip: //aside[@class="article-meta"]
+strip: //div[@class="keep-in-touch"]
+
+test_url: https://www.rachelandrew.co.uk/archives/2019/01/30/html-css-and-our-vanishing-industry-entry-points/

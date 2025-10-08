@@ -1,0 +1,15 @@
+strip_id_or_class: follow
+strip_id_or_class: mvp-soc-mob-list
+strip_id_or_class: mvp-content-bot
+strip_id_or_class: comp-vgrid
+strip_id_or_class: comp-box
+strip_id_or_class: mvp-post-soc-list
+strip_id_or_class: mvp-post-bot-ad
+strip_id_or_class: mvp-related-posts
+strip_id_or_class: mvp-cont-read-wrap
+
+body: //div[@class="mvp-post-main-in"]
+
+author: //a[@rel="author"]
+
+test_url: https://www.iphon.fr/post/iphone-8-x-recharge-sans-fil-cable-simultanee-891682

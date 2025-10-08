@@ -1,0 +1,33 @@
+title: //meta[@property="og:title"]/@content
+date: //meta[@property="article:published_time"]/@content
+date: //header[@id="article_header"]//div[@class="pub-date"]
+body: //div[@itemprop="mainEntityOfPage"]
+body: //article//section[contains(@class, 'content')]
+strip: //aside[contains(@class, 'in-article-recirc')]
+#strip: //dl
+#strip: //p[em/a[contains(@href, 'facebook.com')]]
+prune: no
+
+# Use img in <noscript> instead 
+strip_id_or_class: image__src
+replace_string(<noscript>):<div>
+replace_string(</noscript>):</div>
+
+strip_id_or_class: slate-megaphone
+strip_id_or_class: social-share
+strip_id_or_class: slate-kicker-promo
+strip_id_or_class: tablet-ad
+strip_id_or_class: slate-ad
+
+http_header(Cookie): GDPR_consent=1
+
+author: //meta[@name="author"]/@content
+author: //a[contains(@href, '/author')]
+
+
+
+test_url: https://slate.com/news-and-politics/2020/08/joe-biden-empathy-candidate.html
+test_contains: So many Americans are exhausted
+test_url: https://slate.com/news-and-politics/2020/01/impeachment-trial-witness-trade-bad-idea.html
+test_url: https://slate.com/technology/2010/11/the-facebook-google-spat-over-who-controls-your-data.html
+test_url: https://slate.com/news-and-politics/2011/05/the-danger-of-confusing-the-death-of-osama-bin-laden-with-an-act-of-justice.html

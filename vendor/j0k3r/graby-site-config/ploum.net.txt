@@ -1,0 +1,7 @@
+title: //h1
+body: //article
+author: //article/p[@class="subtitle"]/a/text()
+date: substring-after(//article/p[@class="subtitle"]/text()[2],"le ")
+
+test_url: https://ploum.net/2024-08-26-luddites-technophiles.html
+test_url: https://ploum.net/sunrise-le-calendrier-du-futur/

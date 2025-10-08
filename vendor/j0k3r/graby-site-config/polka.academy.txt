@@ -1,0 +1,41 @@
+body: //main/div/div
+
+prune: no
+
+# strip header:
+strip: //main/div[1]/div[1]/div[1]
+
+strip: //svg
+strip: //button
+strip_id_or_class: '_2D19b'
+
+# strip footer in 'materials' and 'lists' section
+strip: //div[@class='_1AXbp _2QZGT'][last()]/div[@class='_2ezKP _1Abfj _3AP5M'][last()]
+
+#strip footer in 'books'
+strip_id_or_class: '_2ezKP _1TFtF _3AP5M'
+
+#strip social sharing and comments:
+strip_id_or_class: 'X5T8H'
+strip_id_or_class: 'HygOp TVAk2'
+strip_id_or_class: '_3vVVr TVAk2'
+
+replace_string(<section): <div
+replace_string(<article): <div
+
+#rewrite imgage urls
+find_string: <div class="lWOEI" style="background-image:url(
+replace_string: <img class="lWOEI" src="
+
+#strip ')' and </div> at end of image url for .jpg, .jpeg, .png, .*g
+find_string: g)"></div>
+replace_string: g">
+
+#strip ')' and </div> at end of image url for .gif, .tiff, .*f
+find_string: f)"></div>
+replace_string: f">
+
+replace_string(/thumb_image-): /regular_image-
+
+
+test_url: https://polka.academy/materials/917
