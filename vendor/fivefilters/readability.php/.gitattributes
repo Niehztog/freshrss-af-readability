@@ -1,9 +1,0 @@
-# Ignore test-related files
-/test/ export-ignore
-/phpunit.xml export-ignore
-/Makefile export-ignore
-/docker export-ignore
-/docker-compose.yml export-ignore
-
-test/* linguist-language=PHP
-* text=auto eol=lf

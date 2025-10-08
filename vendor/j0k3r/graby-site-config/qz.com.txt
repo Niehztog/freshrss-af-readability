@@ -1,0 +1,12 @@
+title: //meta[@property="og:title"]/@content
+date: //article//time/@datetime
+author: //meta[@name="author"]/@content
+body: //div[@id="article-content"]
+
+# handle duplicate images in JS-processed pages
+# <img ...><noscript><img ...></noscript>
+strip: //img/following-sibling::*[1][self::noscript]
+
+prune: no
+
+test_url: https://qz.com/897790/cia-documents-from-attacking-pakistan-to-ufo-sightings-here-is-everything-the-declassified-cia-documents-have-on-india/

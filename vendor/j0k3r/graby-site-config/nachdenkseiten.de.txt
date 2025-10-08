@@ -1,0 +1,11 @@
+body: //article[@id='content']
+title: //meta[@name='title']/@content
+strip_id_or_class: spendenfoerdern
+strip_id_or_class: thetagsov
+strip_id_or_class: powerpress_player
+strip_id_or_class: powerpress_links
+strip_id_or_class: upTop
+strip: //p[contains(em, 'Dieser Beitrag ist auch als Audio-Podcast verfügbar')]
+
+test_url: https://www.nachdenkseiten.de/?p=44450
+test_url: https://www.nachdenkseiten.de/?p=54849

@@ -1,0 +1,42 @@
+http_header(user-agent): Mozilla/5.0 (Macintosh; Intel Mac OS X 14.7; rv:140.0) haaretz/5.0.49
+
+body: //article[1]/div[1]/header[1] | //article[1]/div[1]/div[1]/section[1] | //div[@data-test="articleBody"]
+
+strip_id_or_class: trinity-iframe
+strip_id_or_class: undefined
+
+strip: //nav
+strip: //button
+strip: //svg
+
+strip: //header//h1
+strip: //div[@data-test='shareBar']
+strip: //div[@data-display-dates='true']/parent::div
+strip: //div[@data-test='tags']
+strip: //a[contains(@href, 'mailto:')]
+
+prune: no
+tidy: no
+
+
+strip_attr: //img[@height='9']/@width
+strip_attr: //img[@height='9']/@height
+
+
+### old version: 2020-2024
+
+body: //div[@data-test="articleBody"]
+title: //meta[@property="og:title"]/@content
+date: //meta[@property="article:published"]/@content
+author: //section[@data-test="articleLayoutRow"]//address//a[contains(@href, '/misc/writers/')]
+
+find_string: data-src="https://
+replace_string: src="https://
+
+strip_id_or_class: trinity-player-iframe-wrapper
+strip: //ul[@data-test="relatedArticles"]
+strip: //div[contains(@id, 'newsletter')]
+strip: //button
+
+
+test_url: https://www.haaretz.com/israel-news/.premium-with-israel-s-encouragement-nso-sold-spyware-to-uae-and-other-gulf-states-1.9093465

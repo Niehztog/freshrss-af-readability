@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
 
-use \fivefilters\Readability\Readability;
-use \fivefilters\Readability\Configuration;
+use Graby\Graby;
 
 class Af_ReadabilityExtension extends Minz_Extension
 {
@@ -162,62 +161,16 @@ class Af_ReadabilityExtension extends Minz_Extension
 			return false;
 		}
 
-		$ch = curl_init();
-		if(false === $ch) {
-			return false;
-		}
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, FRESHRSS_USERAGENT);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			'Accept: text/*',
-			'Content-Type: text/html'
-		]);
-		curl_setopt($ch, CURLOPT_ACCEPT_ENCODING, '');
-		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-		curl_setopt($ch, CURLOPT_MAXFILESIZE, 1024 * 1024 * 2);
-		$response = curl_exec($ch);
-		if (curl_errno($ch)) {
-			return false;
-		}
-		$url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
-		$contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-		curl_close($ch);
-
-		if (!is_string($response)) {
-			return false;
-		}
-
-		$response = $this->ensureUtf8($response, is_string($contentType) ? $contentType : '');
-
-		try {
-			$r = new Readability(new Configuration([
-				'FixRelativeURLs' => true,
-				'OriginalURL' => $url,
-				'ExtraIgnoredElements' => ['template'],
-			]));
-
-			if ($r->parse($response)) {
-				$content = $r->getContent();
-				if (!is_string($content)) {
-					return $content;
-				}
-				// Emit non-ASCII characters as HTML numeric entities so the stored
-				// markup is pure ASCII. Readability returns correct UTF-8, but further
-				// down the FreshRSS pipeline raw UTF-8 bytes were being re-interpreted
-				// as Latin-1 and re-encoded, turning punctuation like ’ and … into
-				// "â" followed by invisible control characters (issue #11). Pure-ASCII
-				// entities are immune to that and decode correctly in every reader.
-				return mb_encode_numericentity($content, [0x80, 0x10FFFF, 0, 0x10FFFF], 'UTF-8');
-			}
-		}
+        try {
+            $graby = new Graby();
+            $result = $graby->fetchContent($url);
+        }
 		catch(\Throwable $t) {
 			Minz_Log::warning('af-readability: ' . $t->getMessage());
 			return false;
 		}
 
-		return false;
+        return $result->getHtml();
 	}
 
 	/**

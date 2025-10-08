@@ -1,0 +1,17 @@
+body: //div[contains(concat(' ',normalize-space(@class),' '),' c-article-content__container ')]
+
+strip: //aside
+
+strip: //div[contains(@class, '-newsletter')]
+
+strip_id_or_class: newsletter-inner-container
+strip_id_or_class: c-sponsored-article
+strip_id_or_class: c-share
+strip_id_or_class: c-sidebar
+strip_id_or_class: c-related-articles
+strip_id_or_class: newsletter-pop-up
+
+prune: no
+
+test_url: https://www.newstatesman.com/politics/2018/05/leader-how-italian-election-result-exposed-europe-s-fraying-union
+test_url: https://www.newstatesman.com/culture/2018/05/two-faces-philip-roth

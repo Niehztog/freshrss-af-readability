@@ -1,0 +1,10 @@
+title: //head/title
+author: //a[@rel="author"]/text()
+
+body: //div[@id="mvp-content-main"]
+next_page_link: //p[@class="pc-pagination"]/a[contains(text(), "Page suivante")]
+
+strip: //p[@class="pc-pagination"]
+
+test_url: https://www.presse-citron.net/voici-comment-vous-pourrez-customiser-vos-fils-dactualite-facebook/
+test_url: https://www.presse-citron.net/netflix-liste-complete-codes-secrets-acceder-categories-cachees/

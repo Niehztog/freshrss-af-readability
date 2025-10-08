@@ -1,0 +1,5 @@
+body: //div[contains(concat(' ',normalize-space(@class),' '),' print:shadow-none ')]//article
+strip: //footer
+strip_id_or_class: comments
+
+test_url: https://www.macg.co/ailleurs/2024/10/microsoft-donne-des-yeux-et-une-voix-lia-de-copilot-146279

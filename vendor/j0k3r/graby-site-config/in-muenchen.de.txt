@@ -1,0 +1,14 @@
+body: //article
+author: //*[@class='author']
+author: substring-after( //div[@class='post-meta'] , '|')
+title: //h1[@class='entry-title']
+
+strip_id_or_class: post-meta
+strip_id_or_class: entry-title
+
+strip: //nav
+
+tidy: no
+prune: no
+
+test_url: https://www.in-muenchen.de/raus-aus-muenchen/fruehlingserwachen.html

@@ -1,0 +1,16 @@
+body: //article[@id='article']
+
+# Fix lazy loading
+find_string: src="data:image
+replace_string: old-src="data:image
+find_string: data-image-loader="http
+replace_string: src="http
+
+strip_id_or_class: comments
+strip: //aside
+strip: //svg
+strip: //div[contains(@x-data, 'newsletters') or contains(@x-data, 'FeedbackModal')]
+
+prune: no
+
+test_url: https://www.pcmag.com/how-to/what-is-discord-and-how-do-you-use-it

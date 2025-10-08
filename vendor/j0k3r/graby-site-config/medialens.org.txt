@@ -1,0 +1,4 @@
+author: //meta[@property="og:site_name"]/@content
+prune: no
+test_url: https://www.medialens.org/2012/the-illusion-of-democracy/
+test_contains: In an era of permanent war, economic meltdown

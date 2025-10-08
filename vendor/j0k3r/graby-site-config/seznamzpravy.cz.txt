@@ -1,0 +1,37 @@
+title: //h1
+body: //div[@data-dot="ogm-article-author"]/parent::section | //*[@*='ogm-article-perex'] | //*[@*='ogm-article-layout']
+author: //span[@*='mol-author-names']
+
+tidy: no
+
+# Fix bold text (class name may change arbitrarily
+find_string: <span class="e_ac"
+replace_string: <strong
+# same for first sub-heading
+find_string: <p class="e_bj c_g3
+replace_string: <strong class="e_bj c_g3
+
+#strip fringe
+strip: //svg
+strip: //aside
+strip: //h1
+strip: //nav
+strip: //div[@data-dot="ogm-date-of-publication"]
+strip: //div[@data-dot="ogm-article-author"]/div
+strip: //div[contains(@class, "ogm-breadcrumb-navigation-wrapper")]
+strip: //span[@data-dot="atm-media-item-image-caption"]
+strip: //article/h6[@id="accessibility-article"]
+strip: //div[@data-dot="ogm-related-documents"]
+strip: //div[@data-dot="ogm-related-tags"]
+strip: //*[@*='mol-embed']
+strip: //div[contains(@class, 'mol-post-card')]
+strip: //section/h6[contains(text(), 'Postranní panel')]/parent::section
+
+# image handling for Fulltext-RSS and preventing double img for Wallabag
+replace_string(<noscript>): <div>
+replace_string(</noscript>): </div>
+strip: //figure/div/div/div/img
+
+test_url: https://www.seznamzpravy.cz/clanek/zahranicni-rusko-se-zasadne-meni-analytik-hodnoti-prigozinovu-rebelii-233151
+test_url: https://www.seznamzpravy.cz/clanek/zahranicni-stredni-evropa-zelena-energie-na-ukor-lesa-v-bavorsku-resi-dilema-s-vetrniky-232669
+test_url: https://www.seznamzpravy.cz/clanek/tech-svet-je-cim-dal-horsi-shodli-se-vsichni-ale-vedci-ukazuji-ze-jde-o-iluzi-232933

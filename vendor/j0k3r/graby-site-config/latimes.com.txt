@@ -1,0 +1,14 @@
+body: //div[contains(@class, 'page-article-body-inner')]
+body: //div[contains(@class, 'page-article-body')]
+author: //div[contains(@class, "author-bio")]//div[contains(@class, "author-name")]
+title: //meta[@property="og:title"]/@content
+date: //meta[@property="article:published_time"]/@content
+
+strip_id_or_class: google-dfp-ad-wrapper
+strip_id_or_class: promo-large
+
+prune: no
+
+test_url: https://www.latimes.com/opinion/la-xpm-2011-may-12-la-oe-gartonash-wilders-20110512-story.html
+test_url: https://www.latimes.com/world-nation/story/2020-10-22/china-xi-jinping-mao-zedong-communist-party
+test_contains: Xi Zhongxun lived through hellish periods of internal party factionalism
