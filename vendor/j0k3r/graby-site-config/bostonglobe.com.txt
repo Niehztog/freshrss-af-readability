@@ -1,0 +1,35 @@
+title: //main//h1[contains(@class, 'headline')]
+author: //div[contains(@class, "authors")]//*[contains(@class, "author")]
+date: //meta[@name="datePublished"]/@content
+body: //main//h2[contains(@class, 'subheader')] | (//main//div[contains(@class, 'image')])[1] | //article[@id="article-body"]
+
+strip_id_or_class: bgmp-comments
+strip_id_or_class: aside
+strip_id_or_class: promo
+strip_id_or_class: skip-nav
+strip_id_or_class: article-more
+strip_id_or_class: article-bar
+strip_id_or_class: post-comment
+strip_id_or_class: link-related_links_link
+strip_id_or_class: newsletter
+strip_id_or_class: arc_ad
+strip_id_or_class: teads-inread
+strip_id_or_class: continue_button
+strip_id_or_class: affiliation
+
+# remove tiny image (full size not present in element) [update Nov 2023: activating full size, see below] 
+#strip: //img/[contains(@src, '/20x0/')]/@src
+
+# This removes image captions.
+#strip_id_or_class: figure
+
+find_string: " data-src="https://bostonglobe-prod.cdn.arcpublishing.com
+replace_string: " x src="https://bostonglobe-prod.cdn.arcpublishing.com
+
+find_string: " src="https://bostonglobe-prod.cdn.arcpublishing.com/resizer/
+replace_string: tinysrc="https://bostonglobe-prod.cdn.arcpublishing.com/resizer/
+
+prune: no
+
+test_url: https://www.bostonglobe.com/2020/04/07/metro/coronavirus-cases-surge-citys-safety-net-hospital-four-out-10-cases-are-now-related-pandemic/
+test_url: https://www.bostonglobe.com/2021/03/01/metro/charlie-youre-making-big-mistake-experts-criticize-states-monday-reopening/

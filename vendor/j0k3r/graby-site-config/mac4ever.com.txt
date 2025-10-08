@@ -1,0 +1,13 @@
+author: //meta[@name="author"]/@content
+date: //meta[@itemprop="datePublished"]/@content
+
+strip_id_or_class: shoppingList
+strip_id_or_class: followUs
+strip_id_or_class: readmore
+strip_id_or_class: refurbStoreList
+strip_id_or_class: lastVideoList
+strip_id_or_class: similar
+
+body: //article[contains(concat(' ',normalize-space(@class),' '),' article ')]//div[contains(concat(' ',normalize-space(@class),' '),' content ')]
+
+test_url: https://www.mac4ever.com/actu/104137_kim-kardashian-et-ses-soeurs-etaient-a-l-apple-store-de-soho-pour-presenter-leur-nouvelle-app

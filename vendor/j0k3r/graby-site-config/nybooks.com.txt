@@ -1,0 +1,12 @@
+body: //article//div[contains(@class, 'review-items')] | //div[contains(@class, 'article-main-content')]
+author: //meta[@name="author"]/@content
+title: //meta[@property="og:title"]/@content
+
+strip_id_or_class: inline-ad
+strip_id_or_class: read-more
+
+prune: no
+
+test_url: http://www.nybooks.com/articles/archives/2012/feb/23/were-more-unequal-you-think/
+test_url: https://www.nybooks.com/articles/2020/11/05/the-hide-that-binds/
+test_contains: She had suspected this, since its story was so distinctive.

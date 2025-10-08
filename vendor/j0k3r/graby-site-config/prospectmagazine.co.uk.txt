@@ -1,0 +1,9 @@
+body: //div[contains(concat(' ',normalize-space(@id),' '),' post_content ')]
+
+requires_login: yes
+login_uri: https://www.prospectmagazine.co.uk/wordpress/wp-login.php
+login_username_field: log
+login_password_field: pwd
+not_logged_in_xpath: //body[@class="login-popup-link"]
+
+test_url: https://www.prospectmagazine.co.uk/magazine/when-it-comes-to-mental-health-the-best-strategy-can-be-have-no-strategy

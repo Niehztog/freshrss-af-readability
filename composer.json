@@ -1,25 +1,17 @@
 {
 	"minimum-stability": "dev",
 	"prefer-stable": true,
-	"repositories": [
-		{
-			"name": "fivefilters/readability.php",
-			"type": "vcs",
-			"url": "https://github.com/fivefilters/readability.php.git"
-		},
-		{
-			"name": "masterminds/html5",
-			"type": "vcs",
-			"url": "https://github.com/Masterminds/html5-php.git"
-		}
-	],
-	"config": {
-		"platform": {
-			"php": "8.1.0"
-		}
-	},
+	"repositories": [],
 	"require": {
-		"fivefilters/readability.php": "*",
-		"psr/http-factory": "1.0.1"
+		"php": ">=8.2",
+		"ext-curl": "*",
+		"ext-tidy": "*",
+		"j0k3r/graby": "dev-master",
+		"php-http/guzzle7-adapter": "^1.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"php-http/discovery": true
+		}
 	}
 }

@@ -1,0 +1,9 @@
+strip_id_or_class: fancy-box
+strip_id_or_class: ad-unit
+strip_id_or_class: product
+
+prune: no
+autodetect_on_failure: no
+
+test_url: https://www.livescience.com/34569-why-flowers-close-at-night-nyctinasty.html
+test_url: https://www.livescience.com/magic-mushroom-injection-case-report.html

@@ -1,0 +1,18 @@
+# GDPR cookie wall (Applies to some other Verizon Media sites - e.g. techchrunch.com)
+http_header(Cookie): A3=d=AQABBFBuQF8CEKPAdo66GfNu0MU1b8SaEjcFEgABAgG3QV8MYPW6b2UB9iMAAAYsQVFBQkFnRmZRYmRnREVJaS13VGYmcz1BUUFBQU9zRl82QngmZz1YMEJ1V2cHCEduQF-_6lqP&S=AQAAAh8LNG77OoAMJtCrgLTaLiQ
+
+body: //div[contains(@class, 'entry__text')]
+body: //section[@id='entry-body']
+
+strip_id_or_class: promo-modal
+strip_id_or_class: evaluate-test-inline-promo
+strip_id_or_class: app-download-interstitial
+strip_id_or_class: entry-inline-subscription-module
+strip_id_or_class: teads-entry-placement
+
+prune: no
+
+test_url: https://www.huffpost.com/entry/tracking-beijings-boom-th_b_1209828
+test_contains: expats liked to wax nostalgic
+test_url: https://www.huffpost.com/entry/president-obama-iphone-throwdown_n_1873826
+test_contains: president was allowed to keep the phone
