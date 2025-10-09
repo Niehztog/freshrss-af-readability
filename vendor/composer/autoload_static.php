@@ -28,7 +28,7 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Finder\\' => 25,
-            'SimplePie\\' => 10,
+            //'SimplePie\\' => 10,
         ),
         'R' => 
         array (
@@ -94,10 +94,10 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        'SimplePie\\' => 
+        /*'SimplePie\\' =>
         array (
             0 => __DIR__ . '/..' . '/simplepie/simplepie/src',
-        ),
+        ),*/
         'Readability\\' => 
         array (
             0 => __DIR__ . '/..' . '/j0k3r/php-readability/src',
@@ -184,10 +184,10 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
             array (
                 0 => __DIR__ . '/..' . '/smalot/pdfparser/src',
             ),
-            'SimplePie' => 
+            /*'SimplePie' =>
             array (
                 0 => __DIR__ . '/..' . '/simplepie/simplepie/library',
-            ),
+            ),*/
         ),
     );
 
