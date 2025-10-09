@@ -12,7 +12,7 @@ return array(
     'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
-    'SimplePie\\' => array($vendorDir . '/simplepie/simplepie/src'),
+    //'SimplePie\\' => array($vendorDir . '/simplepie/simplepie/src'),
     'Readability\\' => array($vendorDir . '/j0k3r/php-readability/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
