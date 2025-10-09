@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Smalot\\PdfParser\\' => array($vendorDir . '/smalot/pdfparser/src'),
-    'SimplePie' => array($vendorDir . '/simplepie/simplepie/library'),
+    //'SimplePie' => array($vendorDir . '/simplepie/simplepie/library'),
 );
