@@ -13,5 +13,11 @@
 		"allow-plugins": {
 			"php-http/discovery": true
 		}
+	},
+	"scripts": {
+		"post-update-cmd": [
+			"rm -rf vendor/simplepie",
+			"composer dump-autoload"
+		]
 	}
 }
