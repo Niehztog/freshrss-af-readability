@@ -28,7 +28,6 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Finder\\' => 25,
-            //'SimplePie\\' => 10,
         ),
         'R' => 
         array (
@@ -94,10 +93,6 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        /*'SimplePie\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/simplepie/simplepie/src',
-        ),*/
         'Readability\\' => 
         array (
             0 => __DIR__ . '/..' . '/j0k3r/php-readability/src',
@@ -108,8 +103,8 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -184,10 +179,6 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
             array (
                 0 => __DIR__ . '/..' . '/smalot/pdfparser/src',
             ),
-            /*'SimplePie' =>
-            array (
-                0 => __DIR__ . '/..' . '/simplepie/simplepie/library',
-            ),*/
         ),
     );
 
