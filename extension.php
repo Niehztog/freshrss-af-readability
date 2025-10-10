@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
 
+use Graby\Content;
 use Graby\Graby;
 
 class Af_ReadabilityExtension extends Minz_Extension
@@ -38,10 +39,23 @@ class Af_ReadabilityExtension extends Minz_Extension
 
 		$extractedContent = $this->extractContent($article->link());
 
-		$contentTest = is_string($extractedContent) ? trim(strip_tags($extractedContent)) : null;
+		if ($extractedContent instanceof Content) {
+			$article->_content($extractedContent->getHtml());
+            $image = $extractedContent->getImage();
 
-		if (!empty($contentTest)) {
-			$article->_content((string)$extractedContent);
+            $enclosures = $article->attributeArray('enclosures');
+            if(empty($enclosures) && !empty($image)) {
+                $ext = strtolower(pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION));
+                if(isset(\FreshRSS_extension_Controller::MIME_TYPES[$ext])) {
+                    $article->_attribute('enclosures', [
+                        [
+                            'url' => $extractedContent->getImage(),
+                            'medium' => 'image',
+                            'type' => \FreshRSS_extension_Controller::MIME_TYPES[$ext],
+                        ]
+                    ]);
+                }
+            }
 		}
 
 		return $article;
@@ -150,7 +164,7 @@ class Af_ReadabilityExtension extends Minz_Extension
 	/**
 	 * @throws Minz_PermissionDeniedException
 	 */
-	private function extractContent(string $url): bool|string|null
+	private function extractContent(string $url): bool|Content
 	{
 		if(empty($url)) {
 			return false;
@@ -165,6 +179,6 @@ class Af_ReadabilityExtension extends Minz_Extension
 			return false;
 		}
 
-        return $result->getHtml();
+        return $result;
 	}
 }
