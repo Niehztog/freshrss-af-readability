@@ -74,7 +74,7 @@ Some web servers temporarily block too many subsequent HTTP requests from the sa
   - Check FreshRSS protocol for error messages related to the plugin
 
 ## Based on:
-- [ttrss-af_readability](https://gitlab.tt-rss.org/tt-rss/plugins/ttrss-af-readability) for Tiny Tiny RSS by Andrew Dolgov
+- [ttrss-af_readability](https://github.com/tt-rss/tt-rss-plugin-af-readability) for Tiny Tiny RSS by Andrew Dolgov
 - [xExtension-Readable](https://github.com/printfuck/xExtension-Readable) for FreshRSS by printfuck
 
 [Official FreshRSS documentation](https://freshrss.github.io/FreshRSS/en/developers/03_Backend/05_Extensions.html) on writing extensions.
