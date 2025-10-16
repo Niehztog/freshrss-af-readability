@@ -1,14 +1,16 @@
-# Article Full Text FreshRSS Extension
+# Article Full Text FreshRSS Extension - Graby branch
 
-This FreshRSS extension uses the [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php) to extract the full text of an article. Most importantly, it does **not** require any docker containers or external services to work.
+This FreshRSS extension uses the [Graby](https://github.com/j0k3r/graby) library for fetching full article contents, which is based on [full-text-rss by fivefilters](https://bitbucket.org/fivefilters/full-text-rss). This leads to a lot better results than using [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php), as `full-text-rss` comes with a large collection of site-specific extraction rules and processes Open Graph HTML tags to extract article images.
+It does **not** require any docker containers or external services to work.
 
 ## Features
-- Extracts full article content using [Readability.php library by Fivefilters](https://github.com/fivefilters/readability.php)
+- Extracts full article content using [Graby](https://github.com/j0k3r/graby)
 - Works entirely client-side (no external services required)
 - Preserves original formatting when possible
 
 ## Requirements
 - PHP 8.1+
+- ext-tidy
 - ext-dom
 - ext-xml
 - ext-curl
