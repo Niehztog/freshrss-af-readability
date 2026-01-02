@@ -7,44 +7,44 @@ namespace Composer\Autoload;
 class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
 {
     public static $prefixLengthsPsr4 = array (
-        'f' => 
+        'f' =>
         array (
             'fivefilters\\Readability\\' => 24,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
         ),
-        'M' => 
+        'M' =>
         array (
             'Masterminds\\' => 12,
         ),
-        'L' => 
+        'L' =>
         array (
             'League\\Uri\\' => 11,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'fivefilters\\Readability\\' => 
+        'fivefilters\\Readability\\' =>
         array (
             0 => __DIR__ . '/..' . '/fivefilters/readability.php/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Masterminds\\' => 
+        'Masterminds\\' =>
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
-        'League\\Uri\\' => 
+        'League\\Uri\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/uri',
             1 => __DIR__ . '/..' . '/league/uri-interfaces',
@@ -53,6 +53,124 @@ class ComposerStaticInitb44cc79a0eaef9cd9c2f2ac697cbe9c0
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'League\\Uri\\BaseUri' => __DIR__ . '/..' . '/league/uri/BaseUri.php',
+        'League\\Uri\\Contracts\\AuthorityInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/AuthorityInterface.php',
+        'League\\Uri\\Contracts\\Conditionable' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/Conditionable.php',
+        'League\\Uri\\Contracts\\DataPathInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/DataPathInterface.php',
+        'League\\Uri\\Contracts\\DomainHostInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/DomainHostInterface.php',
+        'League\\Uri\\Contracts\\FragmentDirective' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/FragmentDirective.php',
+        'League\\Uri\\Contracts\\FragmentInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/FragmentInterface.php',
+        'League\\Uri\\Contracts\\HostInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/HostInterface.php',
+        'League\\Uri\\Contracts\\IpHostInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/IpHostInterface.php',
+        'League\\Uri\\Contracts\\PathInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/PathInterface.php',
+        'League\\Uri\\Contracts\\PortInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/PortInterface.php',
+        'League\\Uri\\Contracts\\QueryInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/QueryInterface.php',
+        'League\\Uri\\Contracts\\SegmentedPathInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/SegmentedPathInterface.php',
+        'League\\Uri\\Contracts\\UriAccess' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/UriAccess.php',
+        'League\\Uri\\Contracts\\UriComponentInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/UriComponentInterface.php',
+        'League\\Uri\\Contracts\\UriException' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/UriException.php',
+        'League\\Uri\\Contracts\\UriInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/UriInterface.php',
+        'League\\Uri\\Contracts\\UserInfoInterface' => __DIR__ . '/..' . '/league/uri-interfaces/Contracts/UserInfoInterface.php',
+        'League\\Uri\\Encoder' => __DIR__ . '/..' . '/league/uri-interfaces/Encoder.php',
+        'League\\Uri\\Exceptions\\ConversionFailed' => __DIR__ . '/..' . '/league/uri-interfaces/Exceptions/ConversionFailed.php',
+        'League\\Uri\\Exceptions\\MissingFeature' => __DIR__ . '/..' . '/league/uri-interfaces/Exceptions/MissingFeature.php',
+        'League\\Uri\\Exceptions\\OffsetOutOfBounds' => __DIR__ . '/..' . '/league/uri-interfaces/Exceptions/OffsetOutOfBounds.php',
+        'League\\Uri\\Exceptions\\SyntaxError' => __DIR__ . '/..' . '/league/uri-interfaces/Exceptions/SyntaxError.php',
+        'League\\Uri\\FeatureDetection' => __DIR__ . '/..' . '/league/uri-interfaces/FeatureDetection.php',
+        'League\\Uri\\HostFormat' => __DIR__ . '/..' . '/league/uri-interfaces/HostFormat.php',
+        'League\\Uri\\HostRecord' => __DIR__ . '/..' . '/league/uri-interfaces/HostRecord.php',
+        'League\\Uri\\HostType' => __DIR__ . '/..' . '/league/uri-interfaces/HostType.php',
+        'League\\Uri\\Http' => __DIR__ . '/..' . '/league/uri/Http.php',
+        'League\\Uri\\HttpFactory' => __DIR__ . '/..' . '/league/uri/HttpFactory.php',
+        'League\\Uri\\IPv4\\BCMathCalculator' => __DIR__ . '/..' . '/league/uri-interfaces/IPv4/BCMathCalculator.php',
+        'League\\Uri\\IPv4\\Calculator' => __DIR__ . '/..' . '/league/uri-interfaces/IPv4/Calculator.php',
+        'League\\Uri\\IPv4\\Converter' => __DIR__ . '/..' . '/league/uri-interfaces/IPv4/Converter.php',
+        'League\\Uri\\IPv4\\GMPCalculator' => __DIR__ . '/..' . '/league/uri-interfaces/IPv4/GMPCalculator.php',
+        'League\\Uri\\IPv4\\NativeCalculator' => __DIR__ . '/..' . '/league/uri-interfaces/IPv4/NativeCalculator.php',
+        'League\\Uri\\IPv6\\Converter' => __DIR__ . '/..' . '/league/uri-interfaces/IPv6/Converter.php',
+        'League\\Uri\\Idna\\Converter' => __DIR__ . '/..' . '/league/uri-interfaces/Idna/Converter.php',
+        'League\\Uri\\Idna\\Error' => __DIR__ . '/..' . '/league/uri-interfaces/Idna/Error.php',
+        'League\\Uri\\Idna\\Option' => __DIR__ . '/..' . '/league/uri-interfaces/Idna/Option.php',
+        'League\\Uri\\Idna\\Result' => __DIR__ . '/..' . '/league/uri-interfaces/Idna/Result.php',
+        'League\\Uri\\KeyValuePair\\Converter' => __DIR__ . '/..' . '/league/uri-interfaces/KeyValuePair/Converter.php',
+        'League\\Uri\\QueryString' => __DIR__ . '/..' . '/league/uri-interfaces/QueryString.php',
+        'League\\Uri\\SchemeType' => __DIR__ . '/..' . '/league/uri/SchemeType.php',
+        'League\\Uri\\Uri' => __DIR__ . '/..' . '/league/uri/Uri.php',
+        'League\\Uri\\UriComparisonMode' => __DIR__ . '/..' . '/league/uri-interfaces/UriComparisonMode.php',
+        'League\\Uri\\UriInfo' => __DIR__ . '/..' . '/league/uri/UriInfo.php',
+        'League\\Uri\\UriResolver' => __DIR__ . '/..' . '/league/uri/UriResolver.php',
+        'League\\Uri\\UriScheme' => __DIR__ . '/..' . '/league/uri/UriScheme.php',
+        'League\\Uri\\UriString' => __DIR__ . '/..' . '/league/uri-interfaces/UriString.php',
+        'League\\Uri\\UriTemplate' => __DIR__ . '/..' . '/league/uri/UriTemplate.php',
+        'League\\Uri\\UriTemplate\\Expression' => __DIR__ . '/..' . '/league/uri/UriTemplate/Expression.php',
+        'League\\Uri\\UriTemplate\\Operator' => __DIR__ . '/..' . '/league/uri/UriTemplate/Operator.php',
+        'League\\Uri\\UriTemplate\\Template' => __DIR__ . '/..' . '/league/uri/UriTemplate/Template.php',
+        'League\\Uri\\UriTemplate\\TemplateCanNotBeExpanded' => __DIR__ . '/..' . '/league/uri/UriTemplate/TemplateCanNotBeExpanded.php',
+        'League\\Uri\\UriTemplate\\VarSpecifier' => __DIR__ . '/..' . '/league/uri/UriTemplate/VarSpecifier.php',
+        'League\\Uri\\UriTemplate\\VariableBag' => __DIR__ . '/..' . '/league/uri/UriTemplate/VariableBag.php',
+        'League\\Uri\\Urn' => __DIR__ . '/..' . '/league/uri/Urn.php',
+        'League\\Uri\\UrnComparisonMode' => __DIR__ . '/..' . '/league/uri-interfaces/UrnComparisonMode.php',
+        'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
+        'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
+        'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',
+        'Masterminds\\HTML5\\Exception' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Exception.php',
+        'Masterminds\\HTML5\\InstructionProcessor' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/InstructionProcessor.php',
+        'Masterminds\\HTML5\\Parser\\CharacterReference' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/CharacterReference.php',
+        'Masterminds\\HTML5\\Parser\\DOMTreeBuilder' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php',
+        'Masterminds\\HTML5\\Parser\\EventHandler' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/EventHandler.php',
+        'Masterminds\\HTML5\\Parser\\FileInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/FileInputStream.php',
+        'Masterminds\\HTML5\\Parser\\InputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/InputStream.php',
+        'Masterminds\\HTML5\\Parser\\ParseError' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/ParseError.php',
+        'Masterminds\\HTML5\\Parser\\Scanner' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Scanner.php',
+        'Masterminds\\HTML5\\Parser\\StringInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/StringInputStream.php',
+        'Masterminds\\HTML5\\Parser\\Tokenizer' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Tokenizer.php',
+        'Masterminds\\HTML5\\Parser\\TreeBuildingRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php',
+        'Masterminds\\HTML5\\Parser\\UTF8Utils' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/UTF8Utils.php',
+        'Masterminds\\HTML5\\Serializer\\HTML5Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php',
+        'Masterminds\\HTML5\\Serializer\\OutputRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
+        'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
+        'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
+        'Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
+        'Psr\\Http\\Message\\RequestFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/RequestFactoryInterface.php',
+        'Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
+        'Psr\\Http\\Message\\ResponseFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/ResponseFactoryInterface.php',
+        'Psr\\Http\\Message\\ResponseInterface' => __DIR__ . '/..' . '/psr/http-message/src/ResponseInterface.php',
+        'Psr\\Http\\Message\\ServerRequestFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/ServerRequestFactoryInterface.php',
+        'Psr\\Http\\Message\\ServerRequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/ServerRequestInterface.php',
+        'Psr\\Http\\Message\\StreamFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/StreamFactoryInterface.php',
+        'Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
+        'Psr\\Http\\Message\\UploadedFileFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UploadedFileFactoryInterface.php',
+        'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
+        'Psr\\Http\\Message\\UriFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UriFactoryInterface.php',
+        'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
+        'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/src/AbstractLogger.php',
+        'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/src/InvalidArgumentException.php',
+        'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/src/LogLevel.php',
+        'Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/src/LoggerAwareInterface.php',
+        'Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerAwareTrait.php',
+        'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/src/LoggerInterface.php',
+        'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerTrait.php',
+        'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/src/NullLogger.php',
+        'fivefilters\\Readability\\Configuration' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Configuration.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMAttr' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMAttr.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMCdataSection' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMCdataSection.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMCharacterData' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMCharacterData.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMComment' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMComment.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMDocument' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMDocument.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMDocumentFragment' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMDocumentFragment.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMDocumentType' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMDocumentType.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMElement' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMElement.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMEntity' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMEntity.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMEntityReference' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMEntityReference.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMNode' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMNode.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMNodeList' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMNodeList.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMNotation' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMNotation.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMProcessingInstruction' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMProcessingInstruction.php',
+        'fivefilters\\Readability\\Nodes\\DOM\\DOMText' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/DOM/DOMText.php',
+        'fivefilters\\Readability\\Nodes\\NodeTrait' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/NodeTrait.php',
+        'fivefilters\\Readability\\Nodes\\NodeUtility' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Nodes/NodeUtility.php',
+        'fivefilters\\Readability\\ParseException' => __DIR__ . '/..' . '/fivefilters/readability.php/src/ParseException.php',
+        'fivefilters\\Readability\\Readability' => __DIR__ . '/..' . '/fivefilters/readability.php/src/Readability.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
