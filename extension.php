@@ -176,6 +176,7 @@ class Af_ReadabilityExtension extends Minz_Extension
 		]);
 		curl_setopt($ch, CURLOPT_ACCEPT_ENCODING, '');
 		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+		curl_setopt($ch, CURLOPT_MAXFILESIZE, 1024 * 1024 * 2);
 		$response = curl_exec($ch);
 		if (curl_errno($ch)) {
 			return false;
@@ -183,7 +184,7 @@ class Af_ReadabilityExtension extends Minz_Extension
 		$url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
 		curl_close($ch);
 
-		if (!is_string($response) || strlen($response) > 1024 * 500) {
+		if (!is_string($response)) {
 			return false;
 		}
 
