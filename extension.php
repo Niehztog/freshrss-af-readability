@@ -14,6 +14,7 @@ class Af_ReadabilityExtension extends Minz_Extension
 	private array $configFeeds = [];
 	/** @var array<int,bool> */
 	private array $configCategories = [];
+	private bool $configLoaded = false;
 
 	public function init()
 	{
@@ -65,8 +66,11 @@ class Af_ReadabilityExtension extends Minz_Extension
 	*/
 	private function loadConfigValues(): void
 	{
+		if ($this->configLoaded) {
+			return;
+		}
 		if (!class_exists('FreshRSS_Context', false)) {
-			echo "Failed data";
+			Minz_Log::warning('af-readability: FreshRSS_Context class not found');
 			return;
 		}
 		try {
@@ -79,6 +83,7 @@ class Af_ReadabilityExtension extends Minz_Extension
 
 		$this->configFeeds = $this->readConfigValue($userConf, 'ext_af_readability_feeds');
 		$this->configCategories = $this->readConfigValue($userConf, 'ext_af_readability_categories');
+		$this->configLoaded = true;
 	}
 
 	/** @return array<int,bool> */
@@ -169,17 +174,16 @@ class Af_ReadabilityExtension extends Minz_Extension
 			'Accept: text/*',
 			'Content-Type: text/html'
 		]);
+		curl_setopt($ch, CURLOPT_ACCEPT_ENCODING, '');
+		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 		$response = curl_exec($ch);
 		if (curl_errno($ch)) {
 			return false;
 		}
-		$redirectUrl = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
-		if (!empty($redirectUrl)) {
-			$url = $redirectUrl;
-		}
+		$url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
 		curl_close($ch);
 
-		if (!is_string($response) || mb_strlen($response) > 1024 * 500) {
+		if (!is_string($response) || strlen($response) > 1024 * 500) {
 			return false;
 		}
 
