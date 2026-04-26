@@ -3,6 +3,10 @@
 This FreshRSS extension uses the [Graby](https://github.com/j0k3r/graby) library for fetching full article contents, which is based on [full-text-rss by fivefilters](https://bitbucket.org/fivefilters/full-text-rss). This leads to a lot better results than using [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php), as `full-text-rss` comes with a large collection of site-specific extraction rules and processes Open Graph HTML tags to extract article images.
 It does **not** require any docker containers or external services to work.
 
+## Adding site-specific configs
+
+Graby uses [full-text-rss site patterns](https://help.fivefilters.org/full-text-rss/site-patterns.html) to extract content for specific sites. If a site is not supported or produces poor results, you can add a custom config file to `vendor/j0k3r/graby-site-config/` following the format described in the link above. To share your config with the community, submit a pull request to the [ftr-site-config repository](https://github.com/fivefilters/ftr-site-config).
+
 ## Features
 - Extracts full article content using [Graby](https://github.com/j0k3r/graby)
 - Works entirely client-side (no external services required)
