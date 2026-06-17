@@ -199,7 +199,17 @@ class Af_ReadabilityExtension extends Minz_Extension
 			]));
 
 			if ($r->parse($response)) {
-				return $r->getContent();
+				$content = $r->getContent();
+				if (!is_string($content)) {
+					return $content;
+				}
+				// Emit non-ASCII characters as HTML numeric entities so the stored
+				// markup is pure ASCII. Readability returns correct UTF-8, but further
+				// down the FreshRSS pipeline raw UTF-8 bytes were being re-interpreted
+				// as Latin-1 and re-encoded, turning punctuation like ’ and … into
+				// "â" followed by invisible control characters (issue #11). Pure-ASCII
+				// entities are immune to that and decode correctly in every reader.
+				return mb_encode_numericentity($content, [0x80, 0x10FFFF, 0, 0x10FFFF], 'UTF-8');
 			}
 		}
 		catch(\Throwable $t) {
