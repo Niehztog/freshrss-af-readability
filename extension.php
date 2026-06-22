@@ -41,7 +41,11 @@ class Af_ReadabilityExtension extends Minz_Extension
 		$extractedContent = $this->extractContent($article->link());
 
 		if ($extractedContent instanceof Content) {
-			$article->_content($extractedContent->getHtml());
+			// Emit non-ASCII as HTML numeric entities so the stored markup is pure
+			// ASCII and survives charset handling further down the FreshRSS pipeline,
+			// where raw UTF-8 bytes were being re-interpreted as Latin-1 and re-encoded,
+			// turning punctuation like ’ and … into "â" + invisible chars (issue #11).
+			$article->_content(mb_encode_numericentity($extractedContent->getHtml(), [0x80, 0x10FFFF, 0, 0x10FFFF], 'UTF-8'));
             $image = $extractedContent->getImage();
 
             $enclosures = $article->attributeArray('enclosures');
@@ -185,39 +189,5 @@ class Af_ReadabilityExtension extends Minz_Extension
 		}
 
         return $result;
-	}
-
-	/**
-	 * Normalise fetched markup to UTF-8. Readability's HTML5 parser handles UTF-8
-	 * itself (with or without a meta charset) but drops bytes from legacy encodings,
-	 * so we only convert when the page explicitly declares a non-UTF-8 charset.
-	 * UTF-8/ASCII is passed through untouched to avoid the UTF-8 -> Latin-1 -> UTF-8
-	 * double-encoding that corrupted punctuation (issue #11).
-	 */
-	private function ensureUtf8(string $response, string $contentType): string
-	{
-		$charset = null;
-		if (preg_match('/charset\s*=\s*["\']?([\w\-]+)/i', $contentType, $m)) {
-			$charset = strtolower($m[1]);
-		}
-		if ($charset === null
-			&& preg_match('/<meta[^>]+charset\s*=\s*["\']?([\w\-]+)/i', $response, $m)) {
-			$charset = strtolower($m[1]);
-		}
-		if ($charset === null
-			|| in_array($charset, ['utf-8', 'utf8', 'us-ascii', 'ascii'], true)) {
-			return $response;
-		}
-		if (!in_array($charset, array_map('strtolower', mb_list_encodings()), true)) {
-			return $response; // unknown charset: leave to Readability rather than risk corruption
-		}
-		$converted = mb_convert_encoding($response, 'UTF-8', $charset);
-		if (!is_string($converted) || $converted === '') {
-			return $response;
-		}
-		// Strip the now-stale meta charset so the HTML5 parser doesn't re-interpret
-		// the already-converted UTF-8 bytes with the old encoding.
-		$stripped = preg_replace('/<meta[^>]*charset[^>]*>/i', '', $converted);
-		return is_string($stripped) ? $stripped : $converted;
 	}
 }
