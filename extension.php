@@ -3,34 +3,9 @@ require_once __DIR__ . "/vendor/autoload.php";
 
 use Graby\Content;
 use Graby\Graby;
-use \Masterminds\HTML5;
 
 class Af_ReadabilityExtension extends Minz_Extension
 {
-	/**
-	 * Elements that must never survive into stored article content.
-	 *
-	 * Readability returns the article subtree as-is, and any document-level element that the
-	 * scraped page placed inside the body is kept. Because entry_before_insert replaces the
-	 * content after FreshRSS has already sanitized the feed, these tags reach the reading view
-	 * verbatim. A single <base href> is enough to re-root every relative URL in the FreshRSS UI.
-	 *
-	 * Embeds (iframe/object/embed) are deliberately absent: Readability already removes them
-	 * except for whitelisted video providers, which users expect to keep.
-	 */
-	private const DISALLOWED_ELEMENTS = [
-		// Document-level: hijack the host page's URL resolution, redirect it, restyle it or
-		// overwrite its title.
-		'base', 'meta', 'link', 'title', 'style',
-		// Active content. Readability strips these already; repeated here so the guarantee does
-		// not depend on its heuristics.
-		'script', 'noscript', 'applet',
-		// Framesets replace the document entirely.
-		'frame', 'frameset',
-		// Inert holders whose contents are never article text.
-		'template', 'basefont',
-	];
-
 	/** @var array<int,FreshRSS_Feed> */
 	private array $feeds;
 	/** @var array<int,FreshRSS_Category> */
@@ -214,77 +189,5 @@ class Af_ReadabilityExtension extends Minz_Extension
 		}
 
         return $result;
-	}
-
-	/**
-	 * Removes document-level and active elements from extracted content.
-	 *
-	 * Operates on the parsed DOM rather than the serialized string: the HTML5 serializer does
-	 * not escape '>' inside attribute values, so a regex that chops at the first '>' can turn an
-	 * inert attribute value such as <base x="><meta http-equiv=refresh ...">  into a live
-	 * element. Parsing keeps attribute values as attribute values.
-	 *
-	 * FreshRSS sanitizes its own scraped content with FreshRSS_SimplePieCustom::sanitizeHTML(),
-	 * which was rejected here because SimplePie's default strip_htmltags list also removes
-	 * iframe/object/embed and would drop the video embeds Readability deliberately keeps.
-	 *
-	 * @return false|string false when the content cannot be sanitized, so that the caller keeps
-	 *                      the original feed content instead of storing unsanitized markup.
-	 */
-	private function sanitizeContent(string $html): bool|string
-	{
-		if ('' === trim($html)) {
-			return false;
-		}
-
-		try {
-			$document = new DOMDocument('1.0', 'UTF-8');
-			$html5 = new HTML5(['disable_html_ns' => true, 'target_document' => $document]);
-			$fragment = $html5->loadHTMLFragment($html);
-			if (!$fragment instanceof DOMDocumentFragment) {
-				return false;
-			}
-
-			// A DOMDocument holds a single element child, so the fragment is parked in a
-			// throwaway wrapper. Only the wrapper's children are serialized back.
-			$wrapper = $document->createElement('div');
-			$document->appendChild($wrapper);
-			$wrapper->appendChild($fragment);
-
-			$xpath = new DOMXPath($document);
-
-			$selector = implode(' or ', array_map(
-				static fn(string $tag): string => 'self::' . $tag,
-				self::DISALLOWED_ELEMENTS
-			));
-			$nodes = $xpath->query('.//*[' . $selector . ']', $wrapper);
-			if (false !== $nodes) {
-				// Snapshot first: the node list is live and shrinks as nodes are removed.
-				foreach (iterator_to_array($nodes) as $node) {
-					$node->parentNode?->removeChild($node);
-				}
-			}
-
-			// Inline event handlers would execute in the reading view.
-			$attributes = $xpath->query('.//@*[starts-with(translate(name(), "ON", "on"), "on")]', $wrapper);
-			if (false !== $attributes) {
-				foreach (iterator_to_array($attributes) as $attribute) {
-					if ($attribute instanceof DOMAttr) {
-						$attribute->ownerElement?->removeAttributeNode($attribute);
-					}
-				}
-			}
-
-			$sanitized = '';
-			foreach ($wrapper->childNodes as $child) {
-				$sanitized .= $html5->saveHTML($child);
-			}
-		}
-		catch(\Throwable $t) {
-			Minz_Log::warning('af-readability: unable to sanitize extracted content: ' . $t->getMessage());
-			return false;
-		}
-
-		return '' === trim($sanitized) ? false : $sanitized;
 	}
 }
