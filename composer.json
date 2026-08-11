@@ -24,6 +24,7 @@
 	},
 	"require": {
 		"fivefilters/readability.php": "^3.3.3",
+		"masterminds/html5": "^2.10",
 		"psr/http-factory": "^1.0.1"
 	}
 }
